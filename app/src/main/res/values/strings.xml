@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">TimetableBPHC</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="more">More</string>
+    <string name="g_api_key">746757679049-nhibkri3cdp3vd47cbtaickrm00ulm45.apps.googleusercontent.com</string>
+    <string name="sign_in_instruction">Please sign in using your BITS email id</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="sign_in">Sign in</string>
+</resources>

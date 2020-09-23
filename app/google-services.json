@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "746757679049",
+    "firebase_url": "https://timetablebphc-12162.firebaseio.com",
+    "project_id": "timetablebphc-12162",
+    "storage_bucket": "timetablebphc-12162.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:746757679049:android:ee27355cb02282682eea18",
+        "android_client_info": {
+          "package_name": "com.example.timetablebphc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "746757679049-guqsoldjrka3o2154lvkjq26lelevmp8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.timetablebphc",
+            "certificate_hash": "5c04129ac1d7b7ec2888e80579222de53cdc4bb3"
+          }
+        },
+        {
+          "client_id": "746757679049-4i29hpp434qckvgj9vej9jlai8jgtiuj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYU4pJvBZX6MZF1igAblaS463N1jl-4F4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "746757679049-4i29hpp434qckvgj9vej9jlai8jgtiuj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
