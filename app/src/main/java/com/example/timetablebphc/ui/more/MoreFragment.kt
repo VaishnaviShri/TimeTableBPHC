@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.timetablebphc.GoogleSignInActivity
 import com.example.timetablebphc.R
@@ -27,6 +29,9 @@ class MoreFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         //TODO: remove redundancy of signout code, gso created twice
+    }
+
+    private fun signOut() {
         auth = FirebaseAuth.getInstance()
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.g_api_key))
@@ -34,12 +39,6 @@ class MoreFragment : Fragment() {
             .build()
 
         googleSignInClient = context?.let { GoogleSignIn.getClient(it, gso) }!!
-        signOut()
-
-       //singOutButton.setOnClickListener(View.OnClickListener { signOut() })
-    }
-
-    private fun signOut() {
         // Firebase sign out
         auth.signOut()
         googleSignInClient.signOut()
@@ -60,10 +59,13 @@ class MoreFragment : Fragment() {
         moreViewModel =
                 ViewModelProviders.of(this).get(MoreViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_more, container, false)
-        /*val textView: TextView = root.findViewById(R.id.text_notifications)
-        moreViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })*/
+
+
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        sing_out_button.setOnClickListener { signOut() }
     }
 }

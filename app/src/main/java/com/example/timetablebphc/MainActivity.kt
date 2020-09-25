@@ -1,14 +1,15 @@
 package com.example.timetablebphc
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -19,6 +20,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         auth = FirebaseAuth.getInstance()
         setContentView(R.layout.activity_main)
+
+        /*fab.setOnClickListener {
+            val intent = Intent(this@MainActivity, AddActivity::class.java) // (1) (2)
+            startActivity(intent)
+        }*/
+        add_button.setOnClickListener{
+            val intent = Intent(this@MainActivity, AddActivity::class.java) // (1) (2)
+            startActivity(intent)
+        }
+
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
         val navController = findNavController(R.id.nav_host_fragment)
@@ -29,7 +40,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_more
             )
         )
-        setupActionBarWithNavController(navController, appBarConfiguration)
+        //setupActionBarWithNavController(navController, appBarConfiguration)
+
+
         navView.setupWithNavController(navController)
     }
 
@@ -37,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
-        updateUI(currentUser) //TODO: pass current user to other activity
+        updateUI(currentUser)
     }
 
     private fun updateUI(currentUser: Any) {

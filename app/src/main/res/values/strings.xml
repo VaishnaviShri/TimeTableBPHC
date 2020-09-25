@@ -8,4 +8,5 @@
     <string name="sign_in_instruction">Please sign in using your BITS email id</string>
     <string name="sign_out">Sign Out</string>
     <string name="sign_in">Sign in</string>
+    <string name="add_button">add button</string>
 </resources>
