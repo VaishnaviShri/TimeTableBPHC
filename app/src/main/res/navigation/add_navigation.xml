@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/navigation_menu_fragment"
-        android:name="com.example.timetablebphc.addUI.AddMenuFragment"
+        android:name="com.example.timetablebphc.ui.addUI.AddMenuFragment"
         android:label="Add Menu"
         tools:layout="@layout/fragment_add_menu" >
         <action
@@ -20,13 +20,13 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_add_course"
-        android:name="com.example.timetablebphc.addUI.AddCourseFragment"
+        android:name="com.example.timetablebphc.ui.addUI.AddCourseFragment"
         android:label="Add course"
         tools:layout="@layout/fragment_add_course" />
 
     <fragment
         android:id="@+id/navigation_add_test"
-        android:name="com.example.timetablebphc.addUI.AddTestFragment"
+        android:name="com.example.timetablebphc.ui.addUI.AddTestFragment"
         android:label="Add test"
         tools:layout="@layout/fragment_add_test" />
 </navigation>

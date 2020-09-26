@@ -1,7 +1,9 @@
-package com.example.timetablebphc
+package com.example.timetablebphc.courseDB
 
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
+import com.example.timetablebphc.courseDB.Course
+import com.example.timetablebphc.courseDB.CourseDao
 
 /**
  * Abstracted Repository as promoted by the Architecture Guide.

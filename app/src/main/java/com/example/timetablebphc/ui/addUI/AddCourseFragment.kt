@@ -1,20 +1,17 @@
-package com.example.timetablebphc.addUI
+package com.example.timetablebphc.ui.addUI
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
-import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.timetablebphc.Course
-import com.example.timetablebphc.CourseViewModel
+import com.example.timetablebphc.courseDB.Course
+import com.example.timetablebphc.courseDB.CourseViewModel
 import com.example.timetablebphc.MainActivity
 import com.example.timetablebphc.R
 import kotlinx.android.synthetic.main.fragment_add_course.*
@@ -49,11 +46,12 @@ class AddCourseFragment : Fragment(){
             }
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
         })
-        val course = Course(0, code)
+
         button_save.setOnClickListener {
             if(code == "")
                 Toast.makeText(context, "Fields empty", Toast.LENGTH_LONG).show()
             else {
+                val course = Course(0, code)
                 courseViewModel.insert(course)
                 val intent = Intent(context, MainActivity::class.java) // (1) (2)
                 startActivity(intent)

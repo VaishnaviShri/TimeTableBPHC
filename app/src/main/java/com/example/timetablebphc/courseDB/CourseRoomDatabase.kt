@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.timetablebphc
+package com.example.timetablebphc.courseDB
 
 import android.content.Context
 import androidx.room.Database
@@ -87,12 +87,12 @@ abstract class CourseRoomDatabase : RoomDatabase() {
         suspend fun populateDatabase(courseDao: CourseDao) {
             // Start the app with a clean database every time.
             // Not needed if you only populate on creation.
-            courseDao.deleteAll()
+            //courseDao.deleteAll()
 
-            var course = Course(1,"MATH F111")
+            /*var course = Course(1,"MATH F111")
             courseDao.insert(course)
             course = Course(2, "CS F111")
-            courseDao.insert(course)
+            courseDao.insert(course)*/
         }
     }
 

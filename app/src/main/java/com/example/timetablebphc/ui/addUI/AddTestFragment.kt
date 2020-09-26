@@ -1,4 +1,4 @@
-package com.example.timetablebphc.addUI
+package com.example.timetablebphc.ui.addUI
 
 import android.os.Bundle
 import android.view.LayoutInflater

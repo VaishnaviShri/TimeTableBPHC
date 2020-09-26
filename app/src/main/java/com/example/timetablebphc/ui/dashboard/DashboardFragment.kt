@@ -1,19 +1,16 @@
 package com.example.timetablebphc.ui.dashboard
 
-import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.timetablebphc.CourseListAdapter
-import com.example.timetablebphc.CourseViewModel
+import com.example.timetablebphc.courseDB.CourseViewModel
 import com.example.timetablebphc.R
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 
@@ -48,9 +45,10 @@ class DashboardFragment : Fragment() {
         // Add an observer on the LiveData returned by getAlphabetizedWords.
         // The onChanged() method fires when the observed data changes and the activity is
         // in the foreground.
-        courseViewModel.allCourses.observe(viewLifecycleOwner, Observer { words ->
+        Log.v("all courses", courseViewModel.allCourses.toString())
+        courseViewModel.allCourses.observe(viewLifecycleOwner, Observer { courses ->
             // Update the cached copy of the words in the adapter.
-            words?.let {
+            courses?.let {
                 adapter?.setCourses(it)
             }
         })

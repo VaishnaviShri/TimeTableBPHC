@@ -1,4 +1,4 @@
-package com.example.timetablebphc
+package com.example.timetablebphc.courseDB
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

@@ -14,14 +14,17 @@
  * limitations under the License.
  */
 
-package com.example.timetablebphc
+package com.example.timetablebphc.ui.dashboard
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.timetablebphc.R
+import com.example.timetablebphc.courseDB.Course
 
 
 class CourseListAdapter internal constructor(
@@ -45,8 +48,9 @@ class CourseListAdapter internal constructor(
         holder.courseItemView.text = current.code
     }
 
-    internal fun setCourses(words: List<Course>) {
-        this.courses = words
+    internal fun setCourses(courses: List<Course>) {
+        this.courses = courses
+        Log.v("all courses list", courses.toString())
         notifyDataSetChanged()
     }
 

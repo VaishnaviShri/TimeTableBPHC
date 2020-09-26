@@ -14,13 +14,15 @@
  * limitations under the License.
  */
 
-package com.example.timetablebphc
+package com.example.timetablebphc.courseDB
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.timetablebphc.courseDB.Course
+import com.example.timetablebphc.courseDB.CourseRepository
+import com.example.timetablebphc.courseDB.CourseRoomDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
