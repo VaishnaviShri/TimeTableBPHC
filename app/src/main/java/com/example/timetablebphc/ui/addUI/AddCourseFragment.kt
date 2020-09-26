@@ -52,7 +52,7 @@ class AddCourseFragment : Fragment(){
                 Toast.makeText(context, "Fields empty", Toast.LENGTH_LONG).show()
             else {
                 val course = Course(0, code)
-                courseViewModel.insert(course)
+                courseViewModel.insertCourse(course)
                 val intent = Intent(context, MainActivity::class.java) // (1) (2)
                 startActivity(intent)
             }

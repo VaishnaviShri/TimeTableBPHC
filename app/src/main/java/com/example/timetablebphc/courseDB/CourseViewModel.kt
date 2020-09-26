@@ -20,9 +20,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import com.example.timetablebphc.courseDB.Course
-import com.example.timetablebphc.courseDB.CourseRepository
-import com.example.timetablebphc.courseDB.CourseRoomDatabase
+import com.example.timetablebphc.quizDB.Quiz
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -42,17 +40,24 @@ class CourseViewModel(application: Application) : AndroidViewModel(application) 
     //   the UI when the data actually changes.
     // - Repository is completely separated from the UI through the ViewModel.
     val allCourses: LiveData<List<Course>>
+    val allQuizzes : LiveData<List<Quiz>>
+
 
     init {
         val courseDao = CourseRoomDatabase.getDatabase(application, viewModelScope).courseDao()
         repository = CourseRepository(courseDao)
         allCourses = repository.allCourses
+        allQuizzes = repository.allQuizzes
     }
 
     /**
      * Launching a new coroutine to insert the data in a non-blocking way
      */
-    fun insert(course: Course) = viewModelScope.launch(Dispatchers.IO) {
-        repository.insert(course)
+    fun insertCourse(course: Course) = viewModelScope.launch(Dispatchers.IO) {
+        repository.insertCourse(course)
+    }
+
+    fun insertQuiz(quiz: Quiz) = viewModelScope.launch(Dispatchers.IO) {
+        repository.insertQuiz(quiz)
     }
 }

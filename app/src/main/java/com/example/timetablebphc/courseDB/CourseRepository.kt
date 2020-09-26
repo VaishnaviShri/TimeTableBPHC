@@ -4,6 +4,7 @@ import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import com.example.timetablebphc.courseDB.Course
 import com.example.timetablebphc.courseDB.CourseDao
+import com.example.timetablebphc.quizDB.Quiz
 
 /**
  * Abstracted Repository as promoted by the Architecture Guide.
@@ -13,7 +14,8 @@ class CourseRepository(private val courseDao: CourseDao) {
 
     // Room executes all queries on a separate thread.
     // Observed LiveData will notify the observer when the data has changed.
-    val allCourses: LiveData<List<Course>> = courseDao.getAll()
+    val allCourses: LiveData<List<Course>> = courseDao.getAllCourses()
+    val allQuizzes: LiveData<List<Quiz>> = courseDao.getAllQuizzes()
 
     // You must call this on a non-UI thread or your app will crash. So we're making this a
     // suspend function so the caller methods know this.
@@ -21,7 +23,11 @@ class CourseRepository(private val courseDao: CourseDao) {
     // thread, blocking the UI.
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
-    suspend fun insert(course: Course) {
-        courseDao.insert(course)
+    suspend fun insertCourse(course: Course) {
+        courseDao.insertCourse(course)
+    }
+
+    suspend fun insertQuiz(quiz: Quiz) {
+        courseDao.insertQuiz(quiz)
     }
 }

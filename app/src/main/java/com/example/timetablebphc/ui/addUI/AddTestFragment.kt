@@ -3,6 +3,7 @@ package com.example.timetablebphc.ui.addUI
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -12,7 +13,10 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import com.example.timetablebphc.MainActivity
 import com.example.timetablebphc.R
+import com.example.timetablebphc.courseDB.CourseViewModel
 import com.example.timetablebphc.quizDB.Quiz
 import kotlinx.android.synthetic.main.fragment_add_course.*
 import kotlinx.android.synthetic.main.fragment_add_test.*
@@ -22,11 +26,11 @@ import java.util.*
 
 class AddTestFragment : Fragment() {
 
-    override fun getContext(): Context {
-        return super.requireContext()
-    }
+    private lateinit var courseViewModel: CourseViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        courseViewModel = ViewModelProvider(this).get(CourseViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -44,10 +48,12 @@ class AddTestFragment : Fragment() {
         var quizType = quizTypes[1]
         // access the spinner
         if (spinner != null) {
-            val adapter = ArrayAdapter(
-                context,
-                android.R.layout.simple_spinner_item, quizTypes
-            )
+            val adapter = context?.let {
+                ArrayAdapter(
+                    it,
+                    android.R.layout.simple_spinner_item, quizTypes
+                )
+            }
             spinner.adapter = adapter
             spinner.onItemSelectedListener = object :
                 AdapterView.OnItemSelectedListener {
@@ -67,12 +73,12 @@ class AddTestFragment : Fragment() {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
             }
             override fun afterTextChanged(arg0: Editable) {
-                courseName = edit_word.text.toString()
+                courseName = edit_course_name.text.toString()
             }
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
         })
 
-        var quizDate = Date(0)
+        var quizDate = "00/00"
 
         date.text = SimpleDateFormat("dd/MM").format(System.currentTimeMillis())
         val cal = Calendar.getInstance()
@@ -84,15 +90,18 @@ class AddTestFragment : Fragment() {
             val myFormat = "dd/MM"
             val sdf = SimpleDateFormat(myFormat, Locale.UK)
             date.text = sdf.format(cal.time)
-            quizDate = cal.time
+            quizDate = sdf.format(cal.time)
 
         }
 
         date.setOnClickListener {
-            DatePickerDialog(context, dateSetListener,
-                cal.get(Calendar.YEAR),
-                cal.get(Calendar.MONTH),
-                cal.get(Calendar.DAY_OF_MONTH)).show()
+            context?.let { it1 ->
+                DatePickerDialog(
+                    it1, dateSetListener,
+                    cal.get(Calendar.YEAR),
+                    cal.get(Calendar.MONTH),
+                    cal.get(Calendar.DAY_OF_MONTH)).show()
+            }
         }
 
         var quizTime = "00:00"
@@ -103,6 +112,9 @@ class AddTestFragment : Fragment() {
 
         button_save.setOnClickListener {
             val quiz = Quiz(0, quizType, courseName, quizDate,  quizTime)
+            courseViewModel.insertQuiz(quiz)
+            val intent = Intent(context, MainActivity::class.java) // (1) (2)
+            startActivity(intent)
         }
 
 
@@ -149,10 +161,13 @@ class AddTestFragment : Fragment() {
         }
 
         date.setOnClickListener {
-            DatePickerDialog(context, dateSetListener,
-                cal.get(Calendar.YEAR),
-                cal.get(Calendar.MONTH),
-                cal.get(Calendar.DAY_OF_MONTH)).show()
+            context?.let { it1 ->
+                DatePickerDialog(
+                    it1, dateSetListener,
+                    cal.get(Calendar.YEAR),
+                    cal.get(Calendar.MONTH),
+                    cal.get(Calendar.DAY_OF_MONTH)).show()
+            }
         }
     }
 
@@ -161,10 +176,12 @@ class AddTestFragment : Fragment() {
         var type = quizTypes[1]
         // access the spinner
         if (spinner != null) {
-            val adapter = ArrayAdapter(
-                context,
-                android.R.layout.simple_spinner_item, quizTypes
-            )
+            val adapter = context?.let {
+                ArrayAdapter(
+                    it,
+                    android.R.layout.simple_spinner_item, quizTypes
+                )
+            }
             spinner.adapter = adapter
             spinner.onItemSelectedListener = object :
                 AdapterView.OnItemSelectedListener {
