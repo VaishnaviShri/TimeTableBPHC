@@ -1,28 +1,34 @@
 package com.example.timetablebphc.ui.addUI
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.CheckBox
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.timetablebphc.courseDB.Course
-import com.example.timetablebphc.courseDB.CourseViewModel
 import com.example.timetablebphc.MainActivity
 import com.example.timetablebphc.R
+import com.example.timetablebphc.courseDB.Course
+import com.example.timetablebphc.courseDB.CourseViewModel
 import kotlinx.android.synthetic.main.fragment_add_course.*
+import kotlinx.android.synthetic.main.fragment_add_course.button_save
+import java.time.LocalTime
 
-class AddCourseFragment : Fragment(){
+
+class AddCourseFragment : Fragment() {
+
+    lateinit var daysList: MutableList<Boolean>
 
     private lateinit var courseViewModel: CourseViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         courseViewModel = ViewModelProvider(this).get(CourseViewModel::class.java)
+        daysList = mutableListOf(false, false, false, false, false, false)
     }
 
     override fun onCreateView(
@@ -33,29 +39,53 @@ class AddCourseFragment : Fragment(){
         return inflater.inflate(R.layout.fragment_add_course, container, false)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        var courseTime = LocalTime.now()
+        course_time_spinner.setOnTimeChangedListener { _, hour, minute ->
+            courseTime = LocalTime.of(hour, minute)
+        }
 
-        var code = edit_word.text.toString()
-        edit_word.addTextChangedListener(object : TextWatcher {
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+        for (i in 0 until week_grid_layout.childCount) {
+            val dayCheckBox = week_grid_layout.getChildAt(i)
+            dayCheckBox.setOnClickListener {
+                if (dayCheckBox is CheckBox) {
+                    val checked: Boolean = dayCheckBox.isChecked
+                    daysList[i] = checked
+                }
+                //onCheckboxClicked(dayCheckBox) }
             }
-            override fun afterTextChanged(arg0: Editable) {
-                code = edit_word.text.toString()
-            }
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-        })
 
-        button_save.setOnClickListener {
-            if(code == "")
-                Toast.makeText(context, "Fields empty", Toast.LENGTH_LONG).show()
-            else {
-                val course = Course(0, code)
+
+            button_save.setOnClickListener {
+                val courseCode = edit_course_code.text.trim().toString()
+                val courseDetails = edit_course_detail.text.trim().toString()
+                val meetLink = edit_meet_link.text.trim().toString()
+
+
+                val course = Course(0, courseCode, courseDetails, courseTime, daysList, meetLink)
                 courseViewModel.insertCourse(course)
                 val intent = Intent(context, MainActivity::class.java) // (1) (2)
                 startActivity(intent)
+
             }
         }
+        fun onCheckboxClicked(view: View) {
+            if (view is CheckBox) {
+                val checked: Boolean = view.isChecked
+                val childCount: Int = week_grid_layout.childCount
+                for (i in 0 until childCount) {
+                    val day = week_grid_layout.getChildAt(i)
+                    when (view.id) {
+                        day.id -> {
+                            daysList[i] = checked
+                        }
+                    }
+                }
+            }
+        }
+
     }
 }

@@ -20,9 +20,8 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.example.timetablebphc.quizDB.Quiz
-import com.example.timetablebphc.quizDB.QuizDao
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -32,6 +31,7 @@ import kotlinx.coroutines.launch
  * The fact that this has very few comments emphasizes its coolness.
  */
 @Database(entities = [Course::class, Quiz ::class], version = 1)
+@TypeConverters(Converters::class)
 abstract class CourseRoomDatabase : RoomDatabase() {
 
     abstract fun courseDao(): CourseDao

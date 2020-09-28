@@ -3,8 +3,6 @@ package com.example.timetablebphc.courseDB
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.timetablebphc.courseDB.Course
-import com.example.timetablebphc.quizDB.Quiz
 
 @Dao
 interface CourseDao {

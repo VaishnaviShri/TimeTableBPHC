@@ -39,7 +39,7 @@ class CourseListAdapter internal constructor(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CourseViewHolder {
-        val itemView = inflater.inflate(R.layout.recyclerview_item, parent, false)
+        val itemView = inflater.inflate(R.layout.row_course, parent, false)
         return CourseViewHolder(itemView)
     }
 

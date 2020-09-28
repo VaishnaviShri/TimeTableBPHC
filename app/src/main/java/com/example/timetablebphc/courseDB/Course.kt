@@ -3,26 +3,28 @@ package com.example.timetablebphc.courseDB
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.sql.Time
-import java.time.DayOfWeek
+import java.time.LocalTime
 
 @Entity(tableName = "course_data_table")
-data class Course (
+data class Course(
 
     @PrimaryKey(autoGenerate = true)
     var key: Int,
 
     @ColumnInfo(name = "course_code")
-    var code : String,
+    var code: String,
 
-    /*@ColumnInfo(name = "course_name")
-    var name : String,
+    @ColumnInfo(name = "course_detail")
+    var detail: String,
 
     @ColumnInfo(name = "course_time")
-    var time : Time,
+    var time: LocalTime,
 
     @ColumnInfo(name = "course_days")
-    var days : Array<DayOfWeek>*/
+    var days: MutableList<Boolean>,
+
+    @ColumnInfo(name = "meet_link")
+    var link: String
 
 
 )

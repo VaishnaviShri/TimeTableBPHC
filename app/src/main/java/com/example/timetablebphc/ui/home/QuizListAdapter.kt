@@ -8,8 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.timetablebphc.R
-import com.example.timetablebphc.courseDB.Course
-import com.example.timetablebphc.quizDB.Quiz
+import com.example.timetablebphc.courseDB.Quiz
 
 
 class QuizListAdapter internal constructor(
@@ -37,8 +36,8 @@ class QuizListAdapter internal constructor(
         val current = quizzes[position]
         holder.quizType.text = current.type
         holder.courseName.text = current.course
-        holder.quizDate.text = current.date
-        holder.quizTime.text = current.time
+        holder.quizDate.text = current.date.toString()
+        holder.quizTime.text = current.time.toString()
     }
 
     internal fun setQuizzes(quizzes: List<Quiz>) {
