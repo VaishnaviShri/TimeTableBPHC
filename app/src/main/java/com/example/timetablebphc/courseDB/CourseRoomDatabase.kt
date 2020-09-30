@@ -22,6 +22,8 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.example.timetablebphc.ui.dashboard.TimeTableDao
+import com.example.timetablebphc.ui.home.HomeDao
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -35,6 +37,8 @@ import kotlinx.coroutines.launch
 abstract class CourseRoomDatabase : RoomDatabase() {
 
     abstract fun courseDao(): CourseDao
+    abstract fun homeDao(): HomeDao
+    abstract fun timeTableDao(): TimeTableDao
 
     companion object {
         @Volatile

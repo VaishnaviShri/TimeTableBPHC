@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.timetablebphc.R
 import com.example.timetablebphc.courseDB.Quiz
+import com.example.timetablebphc.ui.dashboard.DashboardFragmentDirections
 
 
 class QuizListAdapter internal constructor(
@@ -38,6 +40,13 @@ class QuizListAdapter internal constructor(
         holder.courseName.text = current.course
         holder.quizDate.text = current.date.toString()
         holder.quizTime.text = current.time.toString()
+
+        holder.itemView.setOnClickListener {
+            //cellClickListener.onCellClickListener(current)
+
+            val action = HomeFragmentDirections.actionNavigationHomeToQuizDetail(position)
+            holder.itemView.findNavController().navigate(action)
+        }
     }
 
     internal fun setQuizzes(quizzes: List<Quiz>) {

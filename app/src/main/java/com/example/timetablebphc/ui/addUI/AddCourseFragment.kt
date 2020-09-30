@@ -63,6 +63,7 @@ class AddCourseFragment : Fragment() {
                 val courseCode = edit_course_code.text.trim().toString()
                 val courseDetails = edit_course_detail.text.trim().toString()
                 val meetLink = edit_meet_link.text.trim().toString()
+                val hourInTT = courseTime.hour-7
 
 
                 val course = Course(0, courseCode, courseDetails, courseTime, daysList, meetLink)
@@ -72,20 +73,5 @@ class AddCourseFragment : Fragment() {
 
             }
         }
-        fun onCheckboxClicked(view: View) {
-            if (view is CheckBox) {
-                val checked: Boolean = view.isChecked
-                val childCount: Int = week_grid_layout.childCount
-                for (i in 0 until childCount) {
-                    val day = week_grid_layout.getChildAt(i)
-                    when (view.id) {
-                        day.id -> {
-                            daysList[i] = checked
-                        }
-                    }
-                }
-            }
-        }
-
     }
 }

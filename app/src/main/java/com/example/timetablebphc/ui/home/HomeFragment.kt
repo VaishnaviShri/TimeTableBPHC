@@ -13,9 +13,11 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.timetablebphc.R
 import com.example.timetablebphc.courseDB.CourseViewModel
+import com.example.timetablebphc.courseDB.Quiz
 import com.example.timetablebphc.ui.dashboard.CourseListAdapter
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import kotlinx.android.synthetic.main.fragment_home.*
+import java.util.*
 
 class HomeFragment : Fragment() {
 
@@ -53,8 +55,18 @@ class HomeFragment : Fragment() {
         courseViewModel.allQuizzes.observe(viewLifecycleOwner, Observer { quizzes ->
             // Update the cached copy of the words in the adapter.
             quizzes?.let {
-                adapter?.setQuizzes(it)
+                adapter?.setQuizzes(rearrangeList(it))
             }
         })
+    }
+    private fun rearrangeList(quizzes: List<Quiz>): List<Quiz>{
+        val comparator = compareBy<Quiz> { it.date }
+        val anotherComparator = comparator.thenBy { it.time }
+
+        return quizzes.sortedWith(anotherComparator)
+
+        //return quizzes.sortedBy { it.date }
+        //dates.sortWith(compareBy<Date> { it.year }.thenBy { it.month }
+
     }
 }

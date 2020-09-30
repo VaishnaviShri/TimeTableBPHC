@@ -1,13 +1,28 @@
 package com.example.timetablebphc.ui.home
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.*
+import com.example.timetablebphc.courseDB.Course
+import com.example.timetablebphc.courseDB.CourseRoomDatabase
+import com.example.timetablebphc.courseDB.Quiz
+import com.example.timetablebphc.ui.dashboard.TimeTableRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+    private val repository: HomeRepository
+
+    val allQuizzes: LiveData<List<Quiz>>
+
+    init {
+        val homeDao = CourseRoomDatabase.getDatabase(application, viewModelScope).homeDao()
+        repository = HomeRepository(homeDao)
+        allQuizzes = repository.allQuizzes
     }
-    val text: LiveData<String> = _text
+
+
+    fun deleteQuiz(quiz: Quiz) = viewModelScope.launch(Dispatchers.IO) {
+        repository.deleteQuiz(quiz)
+    }
 }
