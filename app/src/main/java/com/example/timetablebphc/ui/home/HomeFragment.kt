@@ -5,19 +5,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.timetablebphc.R
-import com.example.timetablebphc.courseDB.CourseViewModel
+import com.example.timetablebphc.ui.addUI.CourseViewModel
 import com.example.timetablebphc.courseDB.Quiz
-import com.example.timetablebphc.ui.dashboard.CourseListAdapter
-import kotlinx.android.synthetic.main.fragment_dashboard.*
 import kotlinx.android.synthetic.main.fragment_home.*
-import java.util.*
 
 class HomeFragment : Fragment() {
 

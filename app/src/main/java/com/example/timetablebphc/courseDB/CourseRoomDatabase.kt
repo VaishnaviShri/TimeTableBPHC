@@ -22,6 +22,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.example.timetablebphc.ui.addUI.CourseDao
 import com.example.timetablebphc.ui.dashboard.TimeTableDao
 import com.example.timetablebphc.ui.home.HomeDao
 import kotlinx.coroutines.CoroutineScope

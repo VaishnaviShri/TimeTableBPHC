@@ -1,8 +1,10 @@
-package com.example.timetablebphc.courseDB
+package com.example.timetablebphc.ui.addUI
 
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.example.timetablebphc.courseDB.Course
+import com.example.timetablebphc.courseDB.Quiz
 
 @Dao
 interface CourseDao {

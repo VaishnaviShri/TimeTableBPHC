@@ -16,7 +16,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.timetablebphc.MainActivity
 import com.example.timetablebphc.R
-import com.example.timetablebphc.courseDB.CourseViewModel
 import com.example.timetablebphc.courseDB.Quiz
 import kotlinx.android.synthetic.main.fragment_add_test.*
 import java.text.SimpleDateFormat

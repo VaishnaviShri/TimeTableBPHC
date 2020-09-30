@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.NavHostFragment
 import com.example.timetablebphc.GoogleSignInActivity
 import com.example.timetablebphc.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -31,26 +32,6 @@ class MoreFragment : Fragment() {
         //TODO: remove redundancy of signout code, gso created twice
     }
 
-    private fun signOut() {
-        auth = FirebaseAuth.getInstance()
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.g_api_key))
-            .requestEmail()
-            .build()
-
-        googleSignInClient = context?.let { GoogleSignIn.getClient(it, gso) }!!
-        // Firebase sign out
-        auth.signOut()
-        googleSignInClient.signOut()
-        // Google sign out
-        val intent = Intent(context, GoogleSignInActivity::class.java)
-        intent.putExtra("key", "Kotlin")
-        startActivity(intent)
-
-    }
-
-
-
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -66,6 +47,11 @@ class MoreFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        sing_out_button.setOnClickListener { signOut() }
+        sing_out_button.setOnClickListener {
+            moreViewModel.signOut()
+            NavHostFragment.findNavController(this).navigate(R.id.action_navigation_more_to_signin_activity)
+
+        }
+
     }
 }

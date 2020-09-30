@@ -1,10 +1,12 @@
-package com.example.timetablebphc.courseDB
+package com.example.timetablebphc.ui.addUI
 
 import android.app.Application
-import android.opengl.Matrix
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import com.example.timetablebphc.courseDB.Course
+import com.example.timetablebphc.courseDB.CourseRoomDatabase
+import com.example.timetablebphc.courseDB.Quiz
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

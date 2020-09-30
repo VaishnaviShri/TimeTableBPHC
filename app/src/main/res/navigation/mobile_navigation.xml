@@ -65,7 +65,15 @@
         android:id="@+id/navigation_more"
         android:name="com.example.timetablebphc.ui.more.MoreFragment"
         android:label="@string/more"
-        tools:layout="@layout/fragment_more" />
+        tools:layout="@layout/fragment_more">
+    <action android:id="@+id/action_navigation_more_to_signin_activity"
+        app:destination="@+id/navigation_signin_activity"/>
+    </fragment>
+    <activity
+        android:id="@+id/navigation_signin_activity"
+        android:name="com.example.timetablebphc.GoogleSignInActivity"
+        android:label="SignIn Activity"
+        tools:layout="@layout/activity_signin"/>
 
 
 </navigation>

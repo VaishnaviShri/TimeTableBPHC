@@ -1,13 +1,47 @@
 package com.example.timetablebphc.ui.more
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import android.content.Intent
+import android.provider.Settings.Secure.getString
+import androidx.core.content.ContextCompat.startActivity
+import androidx.lifecycle.*
+import androidx.navigation.fragment.NavHostFragment
+import com.example.timetablebphc.GoogleSignInActivity
+import com.example.timetablebphc.R
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class MoreViewModel : ViewModel() {
+class MoreViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is notifications Fragment"
+        value = "This is more Fragment"
     }
     val text: LiveData<String> = _text
+
+
+    val context = application
+
+    private lateinit var moreViewModel : MoreViewModel
+
+    private lateinit var auth: FirebaseAuth
+    private lateinit var googleSignInClient: GoogleSignInClient
+
+    fun signOut() = viewModelScope.launch(Dispatchers.IO){
+        auth = FirebaseAuth.getInstance()
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(R.string.g_api_key.toString())
+            .requestEmail()
+            .build()
+
+        googleSignInClient = context?.let { GoogleSignIn.getClient(it, gso) }!!
+        // Firebase sign out
+        auth.signOut()
+        googleSignInClient.signOut()
+        // Google sign out
+    }
+
 }
