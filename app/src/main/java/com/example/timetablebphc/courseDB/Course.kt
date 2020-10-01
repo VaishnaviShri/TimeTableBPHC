@@ -24,7 +24,10 @@ data class Course(
     var days: MutableList<Boolean>,
 
     @ColumnInfo(name = "meet_link")
-    var link: String
+    var link: String,
+
+    @ColumnInfo(name = "notify")
+    var notify: Boolean
 
 
 )

@@ -65,7 +65,7 @@ class DashboardFragment : Fragment(), CourseListAdapter.CellClickListener {
         var posDisplayCourses = 0
         val displayCourses = emptyList<Course>().toMutableList()
 
-        val emptyCourse =Course(0,"","", LocalTime.now(), mutableListOf(false), "")
+        val emptyCourse =Course(0,"","", LocalTime.now(), mutableListOf(false), "", false)
         for(i in 1..60)
             displayCourses.add(emptyCourse)
 

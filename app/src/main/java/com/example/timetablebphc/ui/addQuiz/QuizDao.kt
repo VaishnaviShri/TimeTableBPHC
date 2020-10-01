@@ -1,5 +1,4 @@
-package com.example.timetablebphc.ui.addUI
-
+package com.example.timetablebphc.ui.addQuiz
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
@@ -7,7 +6,7 @@ import com.example.timetablebphc.courseDB.Course
 import com.example.timetablebphc.courseDB.Quiz
 
 @Dao
-interface CourseDao {
+interface QuizDao {
 
     @Insert
     suspend fun insertCourse(course: Course) : Long
@@ -25,8 +24,8 @@ interface CourseDao {
     suspend fun deleteAll() : Int
 
     @Query("SELECT * FROM course_data_table")
-    fun getAllCourses():LiveData<List<Course>>
+    fun getAllCourses(): LiveData<List<Course>>
 
     @Query("SELECT * FROM quiz_data_table")
-    fun getAllQuizzes():LiveData<List<Quiz>>
+    fun getAllQuizzes(): LiveData<List<Quiz>>
 }

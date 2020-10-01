@@ -1,4 +1,4 @@
-package com.example.timetablebphc.ui.addUI
+package com.example.timetablebphc.ui.addQuiz
 
 import android.app.DatePickerDialog
 import android.content.Intent
@@ -24,13 +24,13 @@ import java.time.LocalTime
 import java.time.ZoneId
 import java.util.*
 
-class AddTestFragment : Fragment() {
+class AddQuizFragment : Fragment() {
 
-    private lateinit var courseViewModel: CourseViewModel
+    private lateinit var quizViewModel: QuizViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        courseViewModel = ViewModelProvider(this).get(CourseViewModel::class.java)
+        quizViewModel = ViewModelProvider(this).get(QuizViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -119,7 +119,7 @@ class AddTestFragment : Fragment() {
 
         button_save.setOnClickListener {
             val quiz = Quiz(0, quizType, courseName, quizDate, quizTime)
-            courseViewModel.insertQuiz(quiz)
+            quizViewModel.insertQuiz(quiz)
             val intent = Intent(context, MainActivity::class.java) // (1) (2)
             startActivity(intent)
         }

@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.timetablebphc.R
-import com.example.timetablebphc.ui.addUI.CourseViewModel
+import com.example.timetablebphc.ui.addCourse.CourseViewModel
 import com.example.timetablebphc.courseDB.Quiz
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -25,14 +25,8 @@ class HomeFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
-        /*val textView: TextView = root.findViewById(R.id.text_home)
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })*/
-        return root
+        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        return inflater.inflate(R.layout.fragment_home, container, false)
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,14 +35,8 @@ class HomeFragment : Fragment() {
         recyclerview_home.adapter = adapter
         recyclerview_home.layoutManager = LinearLayoutManager(context)
 
-        // Get a new or existing ViewModel from the ViewModelProvider.
-        courseViewModel = ViewModelProvider(this).get(CourseViewModel::class.java)
-
-        // Add an observer on the LiveData returned by getAlphabetizedWords.
-        // The onChanged() method fires when the observed data changes and the activity is
-        // in the foreground.
-        Log.v("all quizzes", courseViewModel.allQuizzes.toString())
-        courseViewModel.allQuizzes.observe(viewLifecycleOwner, Observer { quizzes ->
+        Log.v("all quizzes", homeViewModel.allQuizzes.toString())
+        homeViewModel.allQuizzes.observe(viewLifecycleOwner, Observer { quizzes ->
             // Update the cached copy of the words in the adapter.
             quizzes?.let {
                 adapter?.setQuizzes(rearrangeList(it))
@@ -57,12 +45,6 @@ class HomeFragment : Fragment() {
     }
     private fun rearrangeList(quizzes: List<Quiz>): List<Quiz>{
         val comparator = compareBy<Quiz> { it.date }
-        val anotherComparator = comparator.thenBy { it.time }
-
-        return quizzes.sortedWith(anotherComparator)
-
-        //return quizzes.sortedBy { it.date }
-        //dates.sortWith(compareBy<Date> { it.year }.thenBy { it.month }
-
+        return quizzes.sortedWith(comparator.thenBy { it.time })
     }
 }

@@ -1,4 +1,4 @@
-package com.example.timetablebphc.ui.addUI
+package com.example.timetablebphc.ui.addCourse
 
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData

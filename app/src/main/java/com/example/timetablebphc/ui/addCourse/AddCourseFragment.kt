@@ -1,4 +1,4 @@
-package com.example.timetablebphc.ui.addUI
+package com.example.timetablebphc.ui.addCourse
 
 import android.content.Intent
 import android.os.Build
@@ -56,21 +56,26 @@ class AddCourseFragment : Fragment() {
                 }
                 //onCheckboxClicked(dayCheckBox) }
             }
+        }
+
+        var notify = false
+        notification_switch.setOnCheckedChangeListener { _, isChecked ->
+            notify = isChecked
+        }
+
+        button_save.setOnClickListener {
+            val courseCode = edit_course_code.text.trim().toString()
+            val courseDetails = edit_course_detail.text.trim().toString()
+            val meetLink = edit_meet_link.text.trim().toString()
+            val hourInTT = courseTime.hour - 7
 
 
-            button_save.setOnClickListener {
-                val courseCode = edit_course_code.text.trim().toString()
-                val courseDetails = edit_course_detail.text.trim().toString()
-                val meetLink = edit_meet_link.text.trim().toString()
-                val hourInTT = courseTime.hour-7
+            val course =
+                Course(0, courseCode, courseDetails, courseTime, daysList, meetLink, notify)
+            courseViewModel.insertCourse(course)
+            val intent = Intent(context, MainActivity::class.java) // (1) (2)
+            startActivity(intent)
 
-
-                val course = Course(0, courseCode, courseDetails, courseTime, daysList, meetLink)
-                courseViewModel.insertCourse(course)
-                val intent = Intent(context, MainActivity::class.java) // (1) (2)
-                startActivity(intent)
-
-            }
         }
     }
 }
