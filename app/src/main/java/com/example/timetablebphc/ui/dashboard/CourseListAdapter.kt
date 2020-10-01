@@ -41,7 +41,6 @@ import com.example.timetablebphc.courseDB.Course
 
 class CourseListAdapter internal constructor(
         context: Context,
-        private val cellClickListener: CellClickListener
 ) : RecyclerView.Adapter<CourseListAdapter.CourseViewHolder>() {
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
@@ -82,13 +81,9 @@ class CourseListAdapter internal constructor(
         }
 
         holder.itemView.setOnClickListener {
-            //cellClickListener.onCellClickListener(current)
-
             val action = DashboardFragmentDirections.actionNavigationDashboardToCourseDetail(position)
             holder.itemView.findNavController().navigate(action)
         }
-
-
     }
 
     internal fun setCourses(courses: List<Course>) {
@@ -98,12 +93,6 @@ class CourseListAdapter internal constructor(
     }
 
     override fun getItemCount() = courses.size
-
-    //TODO: figure out safe args direction navigation to open fragment instead of this
-    interface CellClickListener {
-        fun onCellClickListener(course: Course)
-    }
-
 }
 
 

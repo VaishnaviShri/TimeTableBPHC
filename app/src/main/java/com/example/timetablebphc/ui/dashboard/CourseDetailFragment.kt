@@ -43,7 +43,8 @@ class CourseDetailFragment : Fragment() {
 
         timeTableViewModel.allCourses.observe(viewLifecycleOwner, { courses ->
             courses?.let {
-                val course = getDisplayCourseList(it)[position]
+                val displayCourses = timeTableViewModel.getDisplayCourseList(it)
+                val course = displayCourses[position]
                 course_code.text = course.code
                 course_detail.text = course.detail
                 course_time.text = course.time.toString()
@@ -54,44 +55,5 @@ class CourseDetailFragment : Fragment() {
                 }
             }
         })
-    }
-
-    //DRY
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun getDisplayCourseList(courses : List<Course>) : List<Course>{
-        //var hour =1
-        //var day = 0
-        if(courses.isEmpty())
-            return courses
-
-        var posCourses =0
-        var posDisplayCourses = 0
-        val displayCourses = emptyList<Course>().toMutableList()
-
-        val emptyCourse = Course(0,"","", LocalTime.now(), mutableListOf(false), "", false)
-        for(i in 1..60)
-            displayCourses.add(emptyCourse)
-
-        for (day in 0 until 6){
-            for (hour in 0..9){
-                //val course = courses[posCourses]
-
-                if(hour == 0) {
-                    posDisplayCourses++
-                    continue
-                }
-
-                for (course in courses) {
-                    val courseHour = course.time.hour - 7
-                    if (course.days[day] && courseHour == hour) {
-                        displayCourses[posDisplayCourses] = course
-                        //displayCourses.add(posDisplayCourses,course)
-                        posCourses++
-                    }
-                }
-                posDisplayCourses++
-            }
-        }
-        return  displayCourses
     }
 }
