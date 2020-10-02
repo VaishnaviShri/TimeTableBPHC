@@ -16,15 +16,19 @@
 
 package com.example.timetablebphc.ui.dashboard
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.opengl.Visibility
+import android.os.Build
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.*
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.view.menu.MenuView
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
@@ -48,7 +52,9 @@ class CourseListAdapter internal constructor(
 
     inner class CourseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textView: TextView = itemView.findViewById(R.id.cell_text_view)
+        val cellTime: TextView = itemView.findViewById(R.id.cell_time)
         val courseCardView: CardView = itemView.findViewById(R.id.course_card_view)
+        val courseCardContent: LinearLayout = itemView.findViewById(R.id.course_card_content)
         val headerCardView: CardView = itemView.findViewById(R.id.header_card_view)
         val headerTextView: TextView = itemView.findViewById(R.id.header_text_view)
     }
@@ -60,7 +66,12 @@ class CourseListAdapter internal constructor(
     }
 
 
+    @SuppressLint("ResourceAsColor")
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: CourseViewHolder, position: Int) {
+
+        holder.setIsRecyclable(false)
+
         val current = courses[position]
 
         val a = listOf("MON","TUE","WED","THU","FRI","SAT")
@@ -68,14 +79,21 @@ class CourseListAdapter internal constructor(
         if(position%10 == 0){//day header
             holder.courseCardView.visibility = GONE
             holder.headerCardView.visibility = VISIBLE
+            holder.headerCardView.isClickable = true
             holder.headerTextView.text = a[position/10]
-
         }else{
             //holder.textView.text = position.toString()
-            if(current.code == "")
-                holder.itemView.visibility = INVISIBLE
-            else
+            if(current.code == "") {
+                //holder.courseCardView.visibility = INVISIBLE
+                holder.courseCardView.setCardBackgroundColor(R.color.empty_cell_color)
+            }
+            else {
+                holder.courseCardView.isClickable = false
                 holder.textView.text = current.code
+                val hr = current.time.hour -7
+                val s = "$hr:00"
+                holder.cellTime.text = s //TODO: Display time (am/pm)
+            }
         }
 
         holder.itemView.setOnClickListener {
