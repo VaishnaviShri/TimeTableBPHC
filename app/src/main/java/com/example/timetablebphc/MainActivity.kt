@@ -22,10 +22,6 @@ class MainActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         setContentView(R.layout.activity_main)
 
-        /*fab.setOnClickListener {
-            val intent = Intent(this@MainActivity, AddActivity::class.java) // (1) (2)
-            startActivity(intent)
-        }*/
         add_button.setOnClickListener{
             val intent = Intent(this@MainActivity, AddActivity::class.java) // (1) (2)
             startActivity(intent)
@@ -34,27 +30,13 @@ class MainActivity : AppCompatActivity() {
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
         val navController = findNavController(R.id.nav_host_fragment)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(
+
+        AppBarConfiguration(
             setOf(
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_more
             )
         )
-        //setupActionBarWithNavController(navController, appBarConfiguration)
-
 
         navView.setupWithNavController(navController)
     }
-
-    /*override fun onStart() {
-        super.onStart()
-        // Check if user is signed in (non-null) and update UI accordingly.
-        val currentUser = auth.currentUser
-        updateUI(currentUser)
-    }
-
-    private fun updateUI(currentUser: Any) {
-
-    }*/
 }

@@ -10,9 +10,6 @@ import com.example.timetablebphc.R
 import kotlinx.android.synthetic.main.fragment_add_menu.*
 
 class AddMenuFragment : Fragment(){
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

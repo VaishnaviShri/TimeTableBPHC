@@ -55,9 +55,7 @@ class CourseListAdapter internal constructor(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CourseViewHolder {
         val itemView = inflater.inflate(R.layout.row_course, parent, false)
-        //(FragmentActivity) context
-        val context = parent.context
-        //courseDetailViewModel = ViewModelProvider(parent).get(CourseDetailViewModel::class.java)
+        parent.context
         return CourseViewHolder(itemView)
     }
 

@@ -7,7 +7,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.example.timetablebphc.AlarmReceiver
@@ -19,7 +18,7 @@ import java.util.*
 
 class QuizViewModel @ViewModelInject constructor(
     private val repository: QuizRepository,
-    @Assisted private val savedStateHandle: SavedStateHandle, application: Application
+    application: Application
 ) : AndroidViewModel(application) {
 
     val context = application

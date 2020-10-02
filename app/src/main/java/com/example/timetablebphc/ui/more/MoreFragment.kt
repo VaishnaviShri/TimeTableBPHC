@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.NavHostFragment
 import com.example.timetablebphc.GoogleSignInActivity
@@ -37,12 +38,8 @@ class MoreFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        moreViewModel =
-                ViewModelProviders.of(this).get(MoreViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_more, container, false)
-
-
-        return root
+        moreViewModel = ViewModelProvider(this).get(MoreViewModel::class.java)
+        return inflater.inflate(R.layout.fragment_more, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
