@@ -22,10 +22,10 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.example.timetablebphc.ui.addCourse.CourseDao
-import com.example.timetablebphc.ui.addQuiz.QuizDao
-import com.example.timetablebphc.ui.dashboard.TimeTableDao
-import com.example.timetablebphc.ui.home.HomeDao
+import com.example.timetablebphc.dao.CourseDao
+import com.example.timetablebphc.dao.QuizDao
+import com.example.timetablebphc.dao.TimeTableDao
+import com.example.timetablebphc.dao.HomeDao
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -44,6 +44,78 @@ abstract class CourseRoomDatabase : RoomDatabase() {
     abstract fun quizDao(): QuizDao
 
     companion object {
+
+        @Volatile
+        private var INSTANCE: CourseRoomDatabase? = null
+
+        fun getInstance(context: Context): CourseRoomDatabase {
+            // Multiple threads can ask for the database at the same time, ensure we only initialize
+            // it once by using synchronized. Only one thread may enter a synchronized block at a
+            // time.
+            synchronized(this) {
+
+                // Copy the current value of INSTANCE to a local variable so Kotlin can smart cast.
+                // Smart cast is only available to local variables.
+                var instance = INSTANCE
+
+                // If instance is `null` make a new database instance.
+                if (instance == null) {
+                    instance = Room.databaseBuilder(
+                        context.applicationContext,
+                        CourseRoomDatabase::class.java,
+                        "sleep_history_database"
+                    )
+                        // Wipes and rebuilds instead of migrating if no Migration object.
+                        // Migration is not part of this lesson. You can learn more about
+                        // migration with Room in this blog post:
+                        // https://medium.com/androiddevelopers/understanding-migrations-with-room-f01e04b07929
+                        .fallbackToDestructiveMigration()
+                        .build()
+                    // Assign INSTANCE to the newly created database.
+                    INSTANCE = instance
+                }
+
+                // Return instance; smart cast to be non-null.
+                return instance
+            }
+        }
+
+        private class CourseDatabaseCallback(
+            private val scope: CoroutineScope
+        ) : RoomDatabase.Callback() {
+            /**
+             * Override the onOpen method to populate the database.
+             * For this sample, we clear the database every time it is created or opened.
+             */
+            override fun onOpen(db: SupportSQLiteDatabase) {
+                super.onOpen(db)
+                // If you want to keep the data through app restarts,
+                // comment out the following line.
+                INSTANCE?.let { database ->
+                    scope.launch(Dispatchers.IO) {
+                        populateDatabase(database.courseDao())
+                    }
+                }
+            }
+        }
+
+        /**
+         * Populate the database in a new coroutine.
+         * If you want to start with more words, just add them.
+         */
+        suspend fun populateDatabase(courseDao: CourseDao) {
+            // Start the app with a clean database every time.
+            // Not needed if you only populate on creation.
+            //courseDao.deleteAll()
+
+            /*var course = Course(1,"MATH F111")
+            courseDao.insert(course)
+            course = Course(2, "CS F111")
+            courseDao.insert(course)*/
+        }
+    }
+
+    /*companion object {
         @Volatile
         private var INSTANCE: CourseRoomDatabase? = null
 
@@ -103,7 +175,7 @@ abstract class CourseRoomDatabase : RoomDatabase() {
             course = Course(2, "CS F111")
             courseDao.insert(course)*/
         }
-    }
+    }*/
 
 
 }

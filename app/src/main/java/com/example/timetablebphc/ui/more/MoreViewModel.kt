@@ -22,10 +22,7 @@ class MoreViewModel(application: Application) : AndroidViewModel(application) {
     }
     val text: LiveData<String> = _text
 
-
     val context = application
-
-    private lateinit var moreViewModel : MoreViewModel
 
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
@@ -37,7 +34,7 @@ class MoreViewModel(application: Application) : AndroidViewModel(application) {
             .requestEmail()
             .build()
 
-        googleSignInClient = context?.let { GoogleSignIn.getClient(it, gso) }!!
+        googleSignInClient = context.let { GoogleSignIn.getClient(it, gso) }!!
         // Firebase sign out
         auth.signOut()
         googleSignInClient.signOut()

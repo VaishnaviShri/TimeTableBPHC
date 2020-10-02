@@ -1,4 +1,4 @@
-package com.example.timetablebphc.ui.home
+package com.example.timetablebphc.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

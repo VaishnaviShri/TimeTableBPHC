@@ -7,32 +7,24 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.viewModelScope
+import androidx.hilt.Assisted
+import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.*
 import com.example.timetablebphc.AlarmReceiver
-import com.example.timetablebphc.courseDB.Course
-import com.example.timetablebphc.courseDB.CourseRoomDatabase
 import com.example.timetablebphc.courseDB.Quiz
-import com.example.timetablebphc.ui.addCourse.CourseRepository
+import com.example.timetablebphc.repositories.QuizRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
 
-class QuizViewModel(application: Application) : AndroidViewModel(application) {
-
-    private val repository: QuizRepository
+class QuizViewModel @ViewModelInject constructor(
+    private val repository: QuizRepository,
+    @Assisted private val savedStateHandle: SavedStateHandle, application: Application
+) : AndroidViewModel(application) {
 
     val context = application
 
-    private val allQuizzes : LiveData<List<Quiz>>
-
-
-    init {
-        val quizDao = CourseRoomDatabase.getDatabase(application, viewModelScope).quizDao()
-        repository = QuizRepository(quizDao)
-        allQuizzes = repository.allQuizzes
-    }
+    private val allQuizzes : LiveData<List<Quiz>> = repository.allQuizzes
 
     /**
      * Launching a new coroutine to insert the data in a non-blocking way

@@ -7,18 +7,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.navArgs
 import com.example.timetablebphc.R
 import com.example.timetablebphc.ui.dashboard.TimeTableViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_course_details.*
 import kotlinx.android.synthetic.main.fragment_quiz_details.*
 
+@AndroidEntryPoint
 class QuizDetailFragment :Fragment(){
 
-    private lateinit var homeViewModel: HomeViewModel
+    private val homeViewModel: HomeViewModel by viewModels()
 
     private var position :Int = 0
     private val args: QuizDetailFragmentArgs by navArgs()
@@ -27,7 +30,6 @@ class QuizDetailFragment :Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         position = args.position.toInt()
         return inflater.inflate(R.layout.fragment_quiz_details, container, false)
     }
