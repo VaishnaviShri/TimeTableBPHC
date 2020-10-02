@@ -1,29 +1,30 @@
 package com.example.timetablebphc.ui.dashboard
 
-import android.app.Application
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.hilt.Assisted
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.example.timetablebphc.courseDB.*
+import com.example.timetablebphc.repositories.TimeTableRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.time.LocalTime
-import java.util.zip.CheckedOutputStream
 
 @RequiresApi(Build.VERSION_CODES.O)
-class TimeTableViewModel(application: Application) : AndroidViewModel(application) {
+class TimeTableViewModel @ViewModelInject constructor(
+    private val repository: TimeTableRepository,
+    @Assisted private val savedStateHandle: SavedStateHandle
+) : ViewModel() {
 
-    private val repository: TimeTableRepository
 
-    val allCourses: LiveData<List<Course>>
+    val allCourses: LiveData<List<Course>> = repository.allCourses
     //val displayCourses : MutableLiveData<List<Course>>? = null
 
-    init {
+   /* init {
         val timeTableDao = CourseRoomDatabase.getDatabase(application, viewModelScope).timeTableDao()
         repository = TimeTableRepository(timeTableDao)
-        allCourses = repository.allCourses
-        //setDisplayCourseList()
-    }
+    }*/
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is dashboard Fragment"

@@ -21,7 +21,6 @@ data class Quiz(
     @ColumnInfo(name = "quiz_date")
     var date: LocalDate,
 
-
     @ColumnInfo(name = "quiz_time ")
     var time: LocalTime
 

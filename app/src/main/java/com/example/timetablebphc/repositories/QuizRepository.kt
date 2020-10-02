@@ -1,11 +1,13 @@
-package com.example.timetablebphc.ui.addQuiz
+package com.example.timetablebphc.repositories
 
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import com.example.timetablebphc.courseDB.Quiz
+import com.example.timetablebphc.dao.QuizDao
+import javax.inject.Inject
 
 
-class QuizRepository(private val quizDao: QuizDao) {
+class QuizRepository @Inject constructor(private val quizDao: QuizDao) {
 
     val allQuizzes: LiveData<List<Quiz>> = quizDao.getAllQuizzes()
 

@@ -3,12 +3,9 @@ package com.example.timetablebphc.courseDB
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.room.TypeConverter
-import kotlinx.android.synthetic.main.fragment_add_test.*
-import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
-import java.util.*
 
 class Converters {
 
@@ -35,7 +32,7 @@ class Converters {
         @TypeConverter
         fun fromTime(value: String?): LocalTime? {
             val a = value?.split(":")?.map { it }
-            return a?.get(0)?.toInt()?.let { LocalTime.of(it, a[1]?.toInt()) }
+            return a?.get(0)?.toInt()?.let { LocalTime.of(it, a[1].toInt()) }
         }
 
         @RequiresApi(Build.VERSION_CODES.O)
@@ -50,7 +47,7 @@ class Converters {
     @TypeConverter
     fun fromDate(value: String?): LocalDate? {
         val a = value?.split("/")?.map { it }
-        return a?.get(1)?.toInt()?.let { LocalDate.of(a[2]?.toInt(), it,a[0].toInt()) }
+        return a?.get(1)?.toInt()?.let { LocalDate.of(a[2].toInt(), it,a[0].toInt()) }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

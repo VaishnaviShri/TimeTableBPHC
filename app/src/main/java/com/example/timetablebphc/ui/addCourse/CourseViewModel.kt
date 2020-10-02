@@ -7,17 +7,14 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.viewModelScope
+import androidx.hilt.Assisted
+import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.*
 import com.example.timetablebphc.AlarmReceiver
 import com.example.timetablebphc.courseDB.Course
-import com.example.timetablebphc.courseDB.CourseRoomDatabase
-import com.example.timetablebphc.courseDB.Quiz
+import com.example.timetablebphc.repositories.CourseRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.time.LocalTime
 import java.util.*
 
 /**
@@ -25,21 +22,14 @@ import java.util.*
  * an up-to-date list of all words.
  */
 
-class CourseViewModel(application: Application) : AndroidViewModel(application) {
-
-    private val repository: CourseRepository
+class CourseViewModel @ViewModelInject constructor(
+    private val repository: CourseRepository,
+    @Assisted private val savedStateHandle: SavedStateHandle, application: Application
+) : AndroidViewModel(application) {
 
 
     val context = application
-
-    private val allCourses: LiveData<List<Course>>
-
-
-    init {
-        val courseDao = CourseRoomDatabase.getDatabase(application, viewModelScope).courseDao()
-        repository = CourseRepository(courseDao)
-        allCourses = repository.allCourses
-    }
+    private val allCourses: LiveData<List<Course>> = repository.allCourses
 
     /**
      * Launching a new coroutine to insert the data in a non-blocking way

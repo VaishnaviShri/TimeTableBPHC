@@ -13,10 +13,13 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.timetablebphc.MainActivity
 import com.example.timetablebphc.R
 import com.example.timetablebphc.courseDB.Quiz
+import com.example.timetablebphc.ui.dashboard.TimeTableViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_add_test.*
 import java.text.SimpleDateFormat
 import java.time.LocalDate
@@ -24,13 +27,12 @@ import java.time.LocalTime
 import java.time.ZoneId
 import java.util.*
 
+@AndroidEntryPoint
 class AddQuizFragment : Fragment() {
-
-    private lateinit var quizViewModel: QuizViewModel
+    private val quizViewModel: QuizViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        quizViewModel = ViewModelProvider(this).get(QuizViewModel::class.java)
     }
 
     override fun onCreateView(

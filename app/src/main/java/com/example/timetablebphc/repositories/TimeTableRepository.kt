@@ -1,9 +1,11 @@
-package com.example.timetablebphc.ui.dashboard
+package com.example.timetablebphc.repositories
 
 import androidx.lifecycle.LiveData
 import com.example.timetablebphc.courseDB.Course
+import com.example.timetablebphc.dao.TimeTableDao
+import javax.inject.Inject
 
-class TimeTableRepository(private val timeTableDao: TimeTableDao) {
+class TimeTableRepository @Inject constructor(private val timeTableDao: TimeTableDao) {
 
     val allCourses: LiveData<List<Course>> = timeTableDao.getAllCourses()
 
