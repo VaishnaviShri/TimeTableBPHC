@@ -31,7 +31,6 @@ class CourseDetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        //timeTableViewModel = ViewModelProvider(this).get(TimeTableViewModel::class.java)
         position = args.position
         return inflater.inflate(R.layout.fragment_course_details, container, false)
     }

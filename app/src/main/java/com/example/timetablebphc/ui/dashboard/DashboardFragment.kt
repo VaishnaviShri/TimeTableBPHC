@@ -39,9 +39,7 @@ class DashboardFragment : Fragment() {
 
         val adapter = context?.let { CourseListAdapter(it) }
         recyclerview.adapter = adapter
-        //recyclerview.layoutManager = GridLayoutManager(context, 6)
         recyclerview.layoutManager = GridLayoutManager(context, 10, GridLayoutManager.HORIZONTAL, false)
-        //recyclerView.setLayoutManager(GridLayoutManager(this, numberOfColumns))
 
         Log.v("all courses", timeTableViewModel.allCourses.toString())
         timeTableViewModel.allCourses.observe(viewLifecycleOwner, { courses ->

@@ -1,6 +1,5 @@
 package com.example.timetablebphc.ui.home
 
-import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.example.timetablebphc.courseDB.Quiz
@@ -9,8 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class HomeViewModel @ViewModelInject constructor(
-    private val repository: HomeRepository,
-    @Assisted private val savedStateHandle: SavedStateHandle
+    private val repository: HomeRepository
 ) : ViewModel()  {
 
     val allQuizzes: LiveData<List<Quiz>> = repository.allQuizzes

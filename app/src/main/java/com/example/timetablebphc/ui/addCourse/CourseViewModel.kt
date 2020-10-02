@@ -7,7 +7,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.example.timetablebphc.AlarmReceiver
@@ -24,7 +23,7 @@ import java.util.*
 
 class CourseViewModel @ViewModelInject constructor(
     private val repository: CourseRepository,
-    @Assisted private val savedStateHandle: SavedStateHandle, application: Application
+    application: Application
 ) : AndroidViewModel(application) {
 
 
@@ -48,7 +47,7 @@ class CourseViewModel @ViewModelInject constructor(
         val hour = totalMinutes / 60
         val minutes = totalMinutes % 60
         val courseCode =
-            course.code //Displays in notification, might want to change to course detail later
+            course.code //Displays in notification
 
         for (i in 0..5) {
             if (course.days[i])

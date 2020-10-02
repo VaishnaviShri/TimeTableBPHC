@@ -55,7 +55,6 @@ class AddCourseFragment : Fragment() {
                     val checked: Boolean = dayCheckBox.isChecked
                     daysList[i] = checked
                 }
-                //onCheckboxClicked(dayCheckBox) }
             }
         }
 

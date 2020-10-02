@@ -42,8 +42,6 @@ class QuizListAdapter internal constructor(
         holder.quizTime.text = current.time.toString()
 
         holder.itemView.setOnClickListener {
-            //cellClickListener.onCellClickListener(current)
-
             val action = HomeFragmentDirections.actionNavigationHomeToQuizDetail(position)
             holder.itemView.findNavController().navigate(action)
         }
