@@ -18,6 +18,7 @@ package com.example.timetablebphc.ui.dashboard
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.Resources
 import android.opengl.Visibility
 import android.os.Build
 import android.util.Log
@@ -41,6 +42,7 @@ import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.timetablebphc.R
 import com.example.timetablebphc.courseDB.Course
+import java.time.format.DateTimeFormatter
 
 
 class CourseListAdapter internal constructor(
@@ -49,12 +51,12 @@ class CourseListAdapter internal constructor(
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var courses = emptyList<Course>() // Cached copy of words
-
+    private val resources: Resources = context.resources
+    private val theme: Resources.Theme = context.theme
     inner class CourseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textView: TextView = itemView.findViewById(R.id.cell_text_view)
         val cellTime: TextView = itemView.findViewById(R.id.cell_time)
         val courseCardView: CardView = itemView.findViewById(R.id.course_card_view)
-        val courseCardContent: LinearLayout = itemView.findViewById(R.id.course_card_content)
         val headerCardView: CardView = itemView.findViewById(R.id.header_card_view)
         val headerTextView: TextView = itemView.findViewById(R.id.header_text_view)
     }
@@ -74,7 +76,7 @@ class CourseListAdapter internal constructor(
 
         val current = courses[position]
 
-        val a = listOf("MON","TUE","WED","THU","FRI","SAT")
+        val a = resources.getStringArray(R.array.week_days)
 
         if(position%10 == 0){//day header
             holder.courseCardView.visibility = GONE
@@ -82,17 +84,15 @@ class CourseListAdapter internal constructor(
             holder.headerCardView.isClickable = true
             holder.headerTextView.text = a[position/10]
         }else{
-            //holder.textView.text = position.toString()
             if(current.code == "") {
                 //holder.courseCardView.visibility = INVISIBLE
-                holder.courseCardView.setCardBackgroundColor(R.color.empty_cell_color)
+                holder.courseCardView.setCardBackgroundColor(resources.getColor(R.color.empty_cell_color, theme))
             }
             else {
                 holder.courseCardView.isClickable = false
                 holder.textView.text = current.code
-                val hr = current.time.hour -7
-                val s = "$hr:00"
-                holder.cellTime.text = s //TODO: Display time (am/pm)
+                val time = current.time.format(DateTimeFormatter.ofPattern("h:mma"))
+                holder.cellTime.text = time
             }
         }
 

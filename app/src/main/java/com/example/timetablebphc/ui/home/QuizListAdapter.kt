@@ -1,16 +1,19 @@
 package com.example.timetablebphc.ui.home
 
 import android.content.Context
+import android.os.Build
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.timetablebphc.R
 import com.example.timetablebphc.courseDB.Quiz
 import com.example.timetablebphc.ui.dashboard.DashboardFragmentDirections
+import java.time.format.DateTimeFormatter
 
 
 class QuizListAdapter internal constructor(
@@ -34,12 +37,13 @@ class QuizListAdapter internal constructor(
         return CourseViewHolder(itemView)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: CourseViewHolder, position: Int) {
         val current = quizzes[position]
         holder.quizType.text = current.type
         holder.courseName.text = current.course
         holder.quizDate.text = current.date.toString()
-        holder.quizTime.text = current.time.toString()
+        holder.quizTime.text = current.time.format(DateTimeFormatter.ofPattern("h:mma"))
 
         holder.itemView.setOnClickListener {
             val action = HomeFragmentDirections.actionNavigationHomeToQuizDetail(position)

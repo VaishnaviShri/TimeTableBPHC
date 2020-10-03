@@ -17,6 +17,7 @@ import com.example.timetablebphc.ui.dashboard.TimeTableViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_course_details.*
 import kotlinx.android.synthetic.main.fragment_quiz_details.*
+import java.time.format.DateTimeFormatter
 
 @AndroidEntryPoint
 class QuizDetailFragment :Fragment(){
@@ -45,7 +46,7 @@ class QuizDetailFragment :Fragment(){
                     quiz_type.text = quiz.type
                     course_name.text = quiz.course
                     quiz_date.text = quiz.date.toString()
-                    quiz_time.text = quiz.time.toString()
+                    quiz_time.text = quiz.time.format(DateTimeFormatter.ofPattern("h:mma"))
                     delete_quiz_button.setOnClickListener {
                         homeViewModel.deleteQuiz(quiz)
                         NavHostFragment.findNavController(this).navigate(R.id.action_navigation_quiz_detail_to_home)
