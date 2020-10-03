@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -114,10 +115,16 @@ class AddQuizFragment : Fragment() {
 
 
         button_save.setOnClickListener {
-            val quiz = Quiz(0, quizType, courseName, quizDate, quizTime)
-            quizViewModel.insertQuiz(quiz)
-            val intent = Intent(context, MainActivity::class.java) // (1) (2)
-            startActivity(intent)
+            if(courseName == ""){
+                Toast.makeText(context,"Please enter course name!", Toast.LENGTH_SHORT).show()
+            }else {
+                val quiz = Quiz(0, quizType, courseName, quizDate, quizTime)
+                quizViewModel.insertQuiz(quiz)
+                val message = "$quizType saved!"
+                Toast.makeText(context,message, Toast.LENGTH_SHORT).show()
+                val intent = Intent(context, MainActivity::class.java) // (1) (2)
+                startActivity(intent)
+            }
         }
 
 

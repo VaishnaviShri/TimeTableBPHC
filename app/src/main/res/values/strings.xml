@@ -20,6 +20,8 @@
     <string name="timetable">TimeTable</string>
     <string name="delete_quiz">delete quiz</string>
     <string name="delete_course">delete course</string>
+    <string name="add_code_hint">Enter code to show on timetable(eg:M3)</string>
+    <string name="add_course_name_and_details">Add course name and details</string>
 
 
     <string-array name="quiz_types">

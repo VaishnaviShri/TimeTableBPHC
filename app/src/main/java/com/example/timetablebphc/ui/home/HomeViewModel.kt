@@ -13,7 +13,6 @@ class HomeViewModel @ViewModelInject constructor(
 
     val allQuizzes: LiveData<List<Quiz>> = repository.allQuizzes
 
-
     fun deleteQuiz(quiz: Quiz) = viewModelScope.launch(Dispatchers.IO) {
         repository.deleteQuiz(quiz)
     }

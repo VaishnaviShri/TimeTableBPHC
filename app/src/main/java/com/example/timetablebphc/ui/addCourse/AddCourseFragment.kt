@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -68,10 +69,31 @@ class AddCourseFragment : Fragment() {
 
             val course =
                 Course(0, courseCode, courseDetails, courseTime, daysList, meetLink, notify)
-            courseViewModel.insertCourse(course)
-            val intent = Intent(context, MainActivity::class.java)
-            startActivity(intent)
+            if(checkInput(course)) {
+                courseViewModel.insertCourse(course)
+                Toast.makeText(context,"Course saved!", Toast.LENGTH_SHORT).show()
+                val intent = Intent(context, MainActivity::class.java)
+                startActivity(intent)
+            }
 
         }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun checkInput(course: Course) : Boolean{
+        if(course.code == ""){
+            Toast.makeText(context,"Please enter course code!", Toast.LENGTH_SHORT).show()
+            return false
+        } else if(course.detail == ""){
+            Toast.makeText(context,"Please enter course name/detail!", Toast.LENGTH_SHORT).show()
+            return false
+        }else if(course.time.hour >16 || course.time.hour <8 ){
+            Toast.makeText(context,"Please enter time during academic hours!", Toast.LENGTH_SHORT).show()
+            return false
+        } else if(!course.days.contains(true)){
+            Toast.makeText(context,"Please select at least one day!", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        return true
     }
 }
