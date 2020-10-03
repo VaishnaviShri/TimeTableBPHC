@@ -28,4 +28,5 @@ class AddMenuFragment : Fragment(){
             NavHostFragment.findNavController(this).navigate(R.id.action_navigation_menu_fragment_to_navigation_add_test)
         }
     }
+
 }

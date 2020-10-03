@@ -16,4 +16,5 @@ class HomeViewModel @ViewModelInject constructor(
     fun deleteQuiz(quiz: Quiz) = viewModelScope.launch(Dispatchers.IO) {
         repository.deleteQuiz(quiz)
     }
+
 }

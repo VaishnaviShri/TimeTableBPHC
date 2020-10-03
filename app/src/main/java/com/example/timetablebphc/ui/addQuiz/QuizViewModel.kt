@@ -23,10 +23,7 @@ class QuizViewModel @ViewModelInject constructor(
 
     val context = application
 
-    /**
-     * Launching a new coroutine to insert the data in a non-blocking way
-     */
-
+    //launching coroutine
     @RequiresApi(Build.VERSION_CODES.O)
     fun insertQuiz(quiz: Quiz) = viewModelScope.launch(Dispatchers.IO) {
         repository.insertQuiz(quiz)
@@ -58,7 +55,6 @@ class QuizViewModel @ViewModelInject constructor(
         cal[Calendar.DAY_OF_YEAR] = quiz.date.dayOfYear
         cal[Calendar.HOUR_OF_DAY] = hour
         cal[Calendar.MINUTE] = minutes
-
 
         alarmManager!!.setExact(
             AlarmManager.RTC_WAKEUP,

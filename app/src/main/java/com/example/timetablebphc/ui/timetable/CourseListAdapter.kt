@@ -72,12 +72,11 @@ class CourseListAdapter internal constructor(
             holder.headerCardView.isClickable = true
             holder.headerTextView.text = a[position/10]
         }else{
-            if(current.code == "") {
-                //holder.courseCardView.visibility = INVISIBLE
+            if(current.code == "") {//empty course
                 holder.courseCardView.setCardBackgroundColor(resources.getColor(R.color.empty_cell_color, theme))
             }
             else {
-                holder.courseCardView.isClickable = false
+                holder.courseCardView.isClickable = false //the course card view is to be set clickable. Strangely, it is clickable when value is false and not clickable when true.
                 holder.textView.text = current.code
                 val time = current.time.format(DateTimeFormatter.ofPattern("h:mma"))
                 holder.cellTime.text = time
@@ -86,7 +85,7 @@ class CourseListAdapter internal constructor(
 
         holder.itemView.setOnClickListener {
             val action = DashboardFragmentDirections.actionNavigationDashboardToCourseDetail(position)
-            holder.itemView.findNavController().navigate(action)
+            holder.itemView.findNavController().navigate(action)//open course detail fragment
         }
     }
 
@@ -97,6 +96,7 @@ class CourseListAdapter internal constructor(
     }
 
     override fun getItemCount() = courses.size
+
 }
 
 

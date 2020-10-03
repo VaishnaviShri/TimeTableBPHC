@@ -90,10 +90,11 @@ class AddCourseFragment : Fragment() {
         }else if(course.time.hour >16 || course.time.hour <8 ){
             Toast.makeText(context,"Please enter time during academic hours!", Toast.LENGTH_SHORT).show()
             return false
-        } else if(!course.days.contains(true)){
+        } else if(!course.days.contains(true)){//if no checkbox is clicked all the list won't contain true
             Toast.makeText(context,"Please select at least one day!", Toast.LENGTH_SHORT).show()
             return false
         }
         return true
     }
+
 }

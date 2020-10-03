@@ -47,7 +47,7 @@ class CourseDetailFragment : Fragment() {
                 meet_link.text = course.link
 
                 var s = ""
-                for (i in 0..5){
+                for (i in 0..5){//create list of days on which course has a class
                     if(course.days[i]) s+= resources.getStringArray(R.array.week_days)[i] + " "
                 }
                 course_days.text = s
@@ -68,4 +68,5 @@ class CourseDetailFragment : Fragment() {
             }
         })
     }
+
 }

@@ -21,8 +21,11 @@
     <string name="delete_quiz">delete quiz</string>
     <string name="delete_course">delete course</string>
     <string name="add_code_hint">Enter code to show on timetable(eg:M3)</string>
-    <string name="add_course_name_and_details">Add course name and details</string>
+    <string name="enter_course_name_and_details">Enter course name and details</string>
     <string name="coming_up">Coming Up</string>
+    <string name="enter_meet_link">Enter meet link</string>
+    <string name="remind_me_before_class">Remind me before class</string>
+    <string name="save">save</string>
 
 
     <string-array name="quiz_types">

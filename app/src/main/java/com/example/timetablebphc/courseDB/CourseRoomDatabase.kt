@@ -20,7 +20,6 @@ abstract class CourseRoomDatabase : RoomDatabase() {
     abstract fun quizDao(): QuizDao
 
     companion object {
-
         @Volatile
         private var INSTANCE: CourseRoomDatabase? = null
 

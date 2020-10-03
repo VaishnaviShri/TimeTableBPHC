@@ -9,16 +9,6 @@ class TimeTableRepository @Inject constructor(private val timeTableDao: TimeTabl
 
     val allCourses: LiveData<List<Course>> = timeTableDao.getAllCourses()
 
-   /* @Suppress("RedundantSuspendModifier")
-    @WorkerThread
-    suspend fun insertCourse(course: Course) {
-        courseDao.insertCourse(course)
-    }
-
-    suspend fun insertQuiz(quiz: Quiz) {
-        courseDao.insertQuiz(quiz)
-    }*/
-
     suspend fun deleteCourse(course: Course) {
         timeTableDao.delete(course)
     }

@@ -9,39 +9,38 @@ import java.time.format.DateTimeFormatter
 
 class Converters {
 
-        @TypeConverter
-        fun fromString(stringListString: String): MutableList<Boolean> {
-            val a = stringListString.split(",").map { it }
-            val list = mutableListOf(false, false, false, false, false, false)
-            for (i in a.indices){
-                if (a[i] == "true")
-                    try {
-                        list[i] = true
-                    }catch (e: Exception){}
-            }
-            return list
+    @TypeConverter
+    fun fromString(stringListString: String): MutableList<Boolean> {
+        val a = stringListString.split(",").map { it }
+        val list = mutableListOf(false, false, false, false, false, false)
+        for (i in a.indices){
+            if (a[i] == "true")
+                try {
+                    list[i] = true
+                }catch (e: Exception){}
         }
+        return list
+    }
 
-        @TypeConverter
-        fun listToString(list: MutableList<Boolean>): String {
-            return list.joinToString(separator = ",")
-        }
+    @TypeConverter
+    fun listToString(list: MutableList<Boolean>): String {
+        return list.joinToString(separator = ",")
+    }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    @TypeConverter
+    fun fromTime(value: String?): LocalTime? {
+        val a = value?.split(":")?.map { it }
+        return a?.get(0)?.toInt()?.let { LocalTime.of(it, a[1].toInt()) }
+    }
 
-        @RequiresApi(Build.VERSION_CODES.O)
-        @TypeConverter
-        fun fromTime(value: String?): LocalTime? {
-            val a = value?.split(":")?.map { it }
-            return a?.get(0)?.toInt()?.let { LocalTime.of(it, a[1].toInt()) }
-        }
+    @RequiresApi(Build.VERSION_CODES.O)
+    @TypeConverter
+    fun timeToString(time: LocalTime?): String? {
+        val formatter = DateTimeFormatter.ofPattern("HH:mm")
 
-        @RequiresApi(Build.VERSION_CODES.O)
-        @TypeConverter
-        fun timeToString(time: LocalTime?): String? {
-            val formatter = DateTimeFormatter.ofPattern("HH:mm")
-
-            return time?.format(formatter)
-        }
+        return time?.format(formatter)
+    }
 
     @RequiresApi(Build.VERSION_CODES.O)
     @TypeConverter
@@ -56,6 +55,5 @@ class Converters {
         val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
         return date?.format(formatter)
     }
-
 
 }

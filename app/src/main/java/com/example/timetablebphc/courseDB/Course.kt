@@ -29,5 +29,4 @@ data class Course(
     @ColumnInfo(name = "notify")
     var notify: Boolean
 
-
 )

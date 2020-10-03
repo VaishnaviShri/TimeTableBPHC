@@ -38,7 +38,7 @@ class DashboardFragment : Fragment() {
         Log.v("all courses", timeTableViewModel.allCourses.toString())
         timeTableViewModel.allCourses.observe(viewLifecycleOwner, { courses ->
             courses?.let {
-                val displayCourses = timeTableViewModel.getDisplayCourseList(it)
+                val displayCourses = timeTableViewModel.getDisplayCourseList(it)//create the list to be displayed in the grid layout recyclerview
                 adapter?.setCourses(displayCourses)
             }
         })

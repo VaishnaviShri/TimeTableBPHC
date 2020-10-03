@@ -19,9 +19,7 @@ import kotlinx.android.synthetic.main.activity_signin.*
 @AndroidEntryPoint
 class GoogleSignInActivity : AppCompatActivity(), View.OnClickListener {
 
-    // [START declare_auth]
     private lateinit var auth: FirebaseAuth
-    // [END declare_auth]
 
     private lateinit var googleSignInClient: GoogleSignInClient
 
@@ -43,7 +41,6 @@ class GoogleSignInActivity : AppCompatActivity(), View.OnClickListener {
         auth = FirebaseAuth.getInstance()
     }
 
-
     override fun onStart() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
@@ -54,7 +51,7 @@ class GoogleSignInActivity : AppCompatActivity(), View.OnClickListener {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        // Result returned from launching the Intent
         if (requestCode == RC_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
@@ -66,9 +63,7 @@ class GoogleSignInActivity : AppCompatActivity(), View.OnClickListener {
                 // Google Sign In failed, update UI appropriately
                 Log.w(TAG, "Google sign in failed", e)
                 Toast.makeText(this, "Google sign in failed", Toast.LENGTH_SHORT).show()
-                // [START_EXCLUDE]
                 updateUI(null)
-                // [END_EXCLUDE]
             }
         }
     }
@@ -142,4 +137,5 @@ class GoogleSignInActivity : AppCompatActivity(), View.OnClickListener {
         private const val TAG = "GoogleActivity"
         private const val RC_SIGN_IN = 9001
     }
+
 }

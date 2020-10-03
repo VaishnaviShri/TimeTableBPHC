@@ -57,4 +57,5 @@ class QuizListAdapter internal constructor(
     }
 
     override fun getItemCount() = quizzes.size
+
 }

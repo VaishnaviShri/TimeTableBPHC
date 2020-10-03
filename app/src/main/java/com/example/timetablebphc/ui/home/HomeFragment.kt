@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.timetablebphc.R
 import com.example.timetablebphc.courseDB.Quiz
@@ -35,14 +34,14 @@ class HomeFragment : Fragment() {
 
         Log.v("all quizzes", homeViewModel.allQuizzes.toString())
         homeViewModel.allQuizzes.observe(viewLifecycleOwner, { quizzes ->
-            // Update the cached copy of the words in the adapter.
             quizzes?.let {
                 adapter?.setQuizzes(rearrangeList(it))
             }
         })
     }
-    private fun rearrangeList(quizzes: List<Quiz>): List<Quiz>{
+    private fun rearrangeList(quizzes: List<Quiz>): List<Quiz>{//sort list with earliest first
         val comparator = compareBy<Quiz> { it.date }
         return quizzes.sortedWith(comparator.thenBy { it.time })
     }
+
 }

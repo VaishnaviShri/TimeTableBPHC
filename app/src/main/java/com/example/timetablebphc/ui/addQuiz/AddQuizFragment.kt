@@ -44,7 +44,7 @@ class AddQuizFragment : Fragment() {
 
         val quizTypes = resources.getStringArray(R.array.quiz_types)
         var quizType = quizTypes[1]
-        // access the spinner
+
         if (spinner != null) {
             val adapter = context?.let {
                 ArrayAdapter(
@@ -107,15 +107,13 @@ class AddQuizFragment : Fragment() {
             }
         }
 
-
         var quizTime =  LocalTime.now()
         timePicker.setOnTimeChangedListener { _, hour, minute ->
             quizTime = LocalTime.of(hour, minute)
         }
 
-
         button_save.setOnClickListener {
-            if(courseName == ""){
+            if(courseName == ""){//check for empty field
                 Toast.makeText(context,"Please enter course name!", Toast.LENGTH_SHORT).show()
             }else {
                 val quiz = Quiz(0, quizType, courseName, quizDate, quizTime)
@@ -126,7 +124,6 @@ class AddQuizFragment : Fragment() {
                 startActivity(intent)
             }
         }
-
-
     }
+
 }

@@ -30,5 +30,4 @@ class MoreViewModel(application: Application) : AndroidViewModel(application) {
         googleSignInClient.signOut()
         // Google sign out
     }
-
 }

@@ -24,20 +24,17 @@ object DBModule {
     @Provides
     fun provideStudentDao(@ApplicationContext appContext: Context) : CourseDao = CourseRoomDatabase.getInstance(appContext).courseDao()
 
-
     @Provides
     fun provideStudentDBRepository(courseDao: CourseDao) = CourseRepository(courseDao)
 
     @Provides
     fun provideQuizDao(@ApplicationContext appContext: Context) : QuizDao = CourseRoomDatabase.getInstance(appContext).quizDao()
 
-
     @Provides
     fun provideQuizDBRepository(quizDao: QuizDao) = QuizRepository(quizDao)
 
     @Provides
     fun provideTimetableDao(@ApplicationContext appContext: Context) : TimeTableDao = CourseRoomDatabase.getInstance(appContext).timeTableDao()
-
 
     @Provides
     fun provideTimetableDBRepository(timeTableDao: TimeTableDao) = TimeTableRepository(timeTableDao)
@@ -47,5 +44,4 @@ object DBModule {
 
     @Provides
     fun provideHomeDBRepository(homeDao: HomeDao) = HomeRepository(homeDao)
-
 }

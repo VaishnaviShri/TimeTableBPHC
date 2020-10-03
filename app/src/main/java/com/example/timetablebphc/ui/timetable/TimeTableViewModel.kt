@@ -45,13 +45,13 @@ class TimeTableViewModel @ViewModelInject constructor(
         for (day in 0 until 6){
             for (hour in 0..9){
 
-                if(hour == 0) {
+                if(hour == 0) {//if the position should contain week header
                     posDisplayCourses++
                     continue
                 }
                 for (course in courses) {
                     val courseHour = course.time.hour - 7
-                    if (course.days[day] && courseHour == hour) {
+                    if (course.days[day] && courseHour == hour) {//if the course has a class for the current cell
                         displayCourses[posDisplayCourses] = course
                         posCourses++
                     }

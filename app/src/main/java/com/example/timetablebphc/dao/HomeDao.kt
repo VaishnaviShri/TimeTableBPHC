@@ -14,4 +14,5 @@ interface HomeDao {
 
     @Delete
     suspend fun delete(quiz: Quiz) : Int
+
 }
