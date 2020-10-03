@@ -8,13 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.timetablebphc.R
-import com.example.timetablebphc.ui.addCourse.CourseViewModel
 import com.example.timetablebphc.courseDB.Quiz
-import com.example.timetablebphc.ui.dashboard.TimeTableViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_home.*
 

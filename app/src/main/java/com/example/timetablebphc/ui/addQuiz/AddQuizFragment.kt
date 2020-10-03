@@ -14,11 +14,9 @@ import android.widget.ArrayAdapter
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
-import com.example.timetablebphc.MainActivity
+import com.example.timetablebphc.activities.MainActivity
 import com.example.timetablebphc.R
 import com.example.timetablebphc.courseDB.Quiz
-import com.example.timetablebphc.ui.dashboard.TimeTableViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_add_test.*
 import java.text.SimpleDateFormat

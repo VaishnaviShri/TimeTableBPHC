@@ -9,7 +9,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
-import com.example.timetablebphc.AlarmReceiver
+import com.example.timetablebphc.notifications.AlarmReceiver
 import com.example.timetablebphc.courseDB.Course
 import com.example.timetablebphc.repositories.CourseRepository
 import kotlinx.coroutines.Dispatchers

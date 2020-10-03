@@ -35,7 +35,7 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.timetablebphc.ui.dashboard.DashboardFragment"
+        android:name="com.example.timetablebphc.ui.timetable.DashboardFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_timetable" >
         <action android:id="@+id/action_navigation_dashboard_to_course_detail"
@@ -49,7 +49,7 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_course_detail"
-        android:name="com.example.timetablebphc.ui.dashboard.CourseDetailFragment"
+        android:name="com.example.timetablebphc.ui.timetable.CourseDetailFragment"
         android:label="Course Detail"
         tools:layout="@layout/fragment_course_details">
         <argument
@@ -71,7 +71,7 @@
     </fragment>
     <activity
         android:id="@+id/navigation_signin_activity"
-        android:name="com.example.timetablebphc.GoogleSignInActivity"
+        android:name="com.example.timetablebphc.activities.GoogleSignInActivity"
         android:label="SignIn Activity"
         tools:layout="@layout/activity_signin"/>
 

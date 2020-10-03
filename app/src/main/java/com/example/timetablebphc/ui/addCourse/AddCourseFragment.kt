@@ -10,11 +10,9 @@ import android.widget.CheckBox
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
-import com.example.timetablebphc.MainActivity
+import com.example.timetablebphc.activities.MainActivity
 import com.example.timetablebphc.R
 import com.example.timetablebphc.courseDB.Course
-import com.example.timetablebphc.ui.dashboard.TimeTableViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_add_course.*
 import kotlinx.android.synthetic.main.fragment_add_course.button_save

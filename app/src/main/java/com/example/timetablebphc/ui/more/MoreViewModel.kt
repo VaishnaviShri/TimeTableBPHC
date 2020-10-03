@@ -1,12 +1,7 @@
 package com.example.timetablebphc.ui.more
 
 import android.app.Application
-import android.content.Intent
-import android.provider.Settings.Secure.getString
-import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.*
-import androidx.navigation.fragment.NavHostFragment
-import com.example.timetablebphc.GoogleSignInActivity
 import com.example.timetablebphc.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient

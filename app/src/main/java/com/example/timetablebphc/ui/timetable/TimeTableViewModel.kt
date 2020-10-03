@@ -1,4 +1,4 @@
-package com.example.timetablebphc.ui.dashboard
+package com.example.timetablebphc.ui.timetable
 
 import android.os.Build
 import androidx.annotation.RequiresApi

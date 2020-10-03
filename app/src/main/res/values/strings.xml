@@ -17,6 +17,7 @@
     <string name="meet_link_for_the_class">Meet link for the class:</string>
     <string name="add_course">Add course</string>
     <string name="add_quiz">Add quiz/ test/ assignment</string>
+    <string name="timetable">TimeTable</string>
 
 
     <string-array name="quiz_types">

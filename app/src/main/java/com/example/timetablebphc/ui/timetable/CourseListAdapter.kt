@@ -14,31 +14,21 @@
  * limitations under the License.
  */
 
-package com.example.timetablebphc.ui.dashboard
+package com.example.timetablebphc.ui.timetable
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Resources
-import android.opengl.Visibility
 import android.os.Build
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.*
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.RequiresApi
-import androidx.appcompat.view.menu.MenuView
 import androidx.cardview.widget.CardView
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.timetablebphc.R
 import com.example.timetablebphc.courseDB.Course
