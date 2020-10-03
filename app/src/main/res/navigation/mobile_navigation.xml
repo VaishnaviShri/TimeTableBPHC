@@ -37,7 +37,7 @@
         android:id="@+id/navigation_dashboard"
         android:name="com.example.timetablebphc.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" >
+        tools:layout="@layout/fragment_timetable" >
         <action android:id="@+id/action_navigation_dashboard_to_course_detail"
             app:destination="@+id/navigation_course_detail">
             <argument

@@ -6,19 +6,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.timetablebphc.R
-import com.example.timetablebphc.courseDB.Course
-import com.example.timetablebphc.ui.addCourse.CourseViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_dashboard.*
-import java.time.LocalTime
+import kotlinx.android.synthetic.main.fragment_timetable.*
 
 @AndroidEntryPoint
 class DashboardFragment : Fragment() {
@@ -30,7 +24,7 @@ class DashboardFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         //timeTableViewModel = ViewModelProvider(this).get(TimeTableViewModel::class.java)
-        return inflater.inflate(R.layout.fragment_dashboard, container, false)
+        return inflater.inflate(R.layout.fragment_timetable, container, false)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
