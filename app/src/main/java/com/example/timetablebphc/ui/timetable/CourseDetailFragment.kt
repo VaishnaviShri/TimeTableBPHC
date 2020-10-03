@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
@@ -37,8 +38,8 @@ class CourseDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         timeTableViewModel.allCourses.observe(viewLifecycleOwner, { courses ->
-            courses?.let {
-                val displayCourses = timeTableViewModel.getDisplayCourseList(it)
+            courses?.let { courses ->
+                val displayCourses = timeTableViewModel.getDisplayCourseList(courses)
                 val course = displayCourses[position]
                 course_code.text = course.code
                 course_detail.text = course.detail
@@ -51,8 +52,18 @@ class CourseDetailFragment : Fragment() {
                 }
                 course_days.text = s
                 delete_course_button.setOnClickListener {
-                    timeTableViewModel.deleteCourse(course)
-                    NavHostFragment.findNavController(this).navigate(R.id.action_navigation_course_detail_to_dashboard)
+                    val builder = context?.let { AlertDialog.Builder(it) }
+                    if (builder != null) {
+                        builder.setMessage("Are you sure you want to delete?").setCancelable(false)
+                            .setPositiveButton("Yes") { _, _ ->
+                                timeTableViewModel.deleteCourse(course)
+                                NavHostFragment.findNavController(this).navigate(R.id.action_navigation_course_detail_to_dashboard)
+                            }.setNegativeButton("No") { dialog, _ ->
+                                // Dismiss the dialog
+                                dialog.dismiss()
+                            }
+                        builder.create().show()
+                    }
                 }
             }
         })

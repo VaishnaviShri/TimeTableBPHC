@@ -12,11 +12,6 @@ import kotlinx.coroutines.launch
 
 class MoreViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is more Fragment"
-    }
-    val text: LiveData<String> = _text
-
     val context = application
 
     private lateinit var auth: FirebaseAuth

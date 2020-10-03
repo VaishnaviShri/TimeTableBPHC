@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -37,16 +38,26 @@ class QuizDetailFragment :Fragment(){
         super.onViewCreated(view, savedInstanceState)
 
         homeViewModel.allQuizzes.observe(viewLifecycleOwner, Observer { quizzes ->
-            quizzes?.let {
-                if(it.isNotEmpty()) {
-                    val quiz = it[position]
+            quizzes?.let { quizzes ->
+                if(quizzes.isNotEmpty()) {
+                    val quiz = quizzes[position]
                     quiz_type.text = quiz.type
                     course_name.text = quiz.course
                     quiz_date.text = quiz.date.toString()
                     quiz_time.text = quiz.time.format(DateTimeFormatter.ofPattern("h:mma"))
                     delete_quiz_button.setOnClickListener {
-                        homeViewModel.deleteQuiz(quiz)
-                        NavHostFragment.findNavController(this).navigate(R.id.action_navigation_quiz_detail_to_home)
+                        val builder = context?.let { AlertDialog.Builder(it) }
+                        if (builder != null) {
+                            builder.setMessage("Are you sure you want to delete?").setCancelable(false)
+                                .setPositiveButton("Yes") { _, _ ->
+                                    homeViewModel.deleteQuiz(quiz)
+                                    NavHostFragment.findNavController(this).navigate(R.id.action_navigation_quiz_detail_to_home)
+                                }.setNegativeButton("No") { dialog, _ ->
+                                    // Dismiss the dialog
+                                    dialog.dismiss()
+                                }
+                            builder.create().show()
+                        }
                     }
                 }
             }
