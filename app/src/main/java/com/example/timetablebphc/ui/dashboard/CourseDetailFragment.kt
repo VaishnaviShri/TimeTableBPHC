@@ -17,7 +17,6 @@ import com.example.timetablebphc.courseDB.Course
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_course_details.*
 import java.time.LocalTime
-import java.time.format.DateTimeFormatter
 
 @AndroidEntryPoint
 class CourseDetailFragment : Fragment() {
@@ -46,14 +45,8 @@ class CourseDetailFragment : Fragment() {
                 val course = displayCourses[position]
                 course_code.text = course.code
                 course_detail.text = course.detail
-                course_time.text = course.time.format(DateTimeFormatter.ofPattern("h:mma"))
+                course_time.text = course.time.toString()
                 meet_link.text = course.link
-
-                var s = ""
-                for (i in 0..5){
-                    if(course.days[i]) s+= resources.getStringArray(R.array.week_days)[i] + " "
-                }
-                course_days.text = s
                 delete_course_button.setOnClickListener {
                     timeTableViewModel.deleteCourse(course)
                     NavHostFragment.findNavController(this).navigate(R.id.action_navigation_course_detail_to_dashboard)
