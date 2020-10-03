@@ -23,8 +23,6 @@ class QuizViewModel @ViewModelInject constructor(
 
     val context = application
 
-    private val allQuizzes : LiveData<List<Quiz>> = repository.allQuizzes
-
     /**
      * Launching a new coroutine to insert the data in a non-blocking way
      */

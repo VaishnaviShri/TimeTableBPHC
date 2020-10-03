@@ -5,8 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.timetablebphc.courseDB.Course
 import com.example.timetablebphc.courseDB.Quiz
-import dagger.Provides
-import javax.inject.Inject
 
 @Dao
 interface CourseDao {

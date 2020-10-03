@@ -12,7 +12,7 @@ class Converters {
         @TypeConverter
         fun fromString(stringListString: String): MutableList<Boolean> {
             val a = stringListString.split(",").map { it }
-            val list = mutableListOf<Boolean>(false, false, false, false, false, false)
+            val list = mutableListOf(false, false, false, false, false, false)
             for (i in a.indices){
                 if (a[i] == "true")
                     try {

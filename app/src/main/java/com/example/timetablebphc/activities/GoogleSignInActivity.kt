@@ -16,10 +16,6 @@ import com.google.firebase.auth.GoogleAuthProvider
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_signin.*
 
-
-/**
- * Demonstrate Firebase Authentication using a Google ID Token.
- */
 @AndroidEntryPoint
 class GoogleSignInActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -32,7 +28,6 @@ class GoogleSignInActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signin)
-
 
         signInButton.setOnClickListener(this)
 
@@ -79,10 +74,9 @@ class GoogleSignInActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun  isBitsian(user: FirebaseUser): Boolean {
-        val emailId = user.email
+        val emailId = user.email.toString()
         val pattern = Regex("^\\w+@hyderabad\\.bits-pilani\\.ac\\.in\$")
-        val ans = emailId?.let { pattern.matches(it) }
-        return ans!!
+        return pattern.matches(emailId)
     }
 
     private fun firebaseAuthWithGoogle(idToken: String) {
@@ -115,20 +109,9 @@ class GoogleSignInActivity : AppCompatActivity(), View.OnClickListener {
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
 
-    private fun signOut() {
-        // Firebase sign out
-        auth.signOut()
-
-        // Google sign out
-        googleSignInClient.signOut().addOnCompleteListener(this) {
-            updateUI(null)
-        }
-    }
-
     private fun revokeAccess() {
         // Firebase sign out
         auth.signOut()
-
         // Google revoke access
         googleSignInClient.revokeAccess().addOnCompleteListener(this) {
             updateUI(null)
@@ -146,10 +129,6 @@ class GoogleSignInActivity : AppCompatActivity(), View.OnClickListener {
                 Toast.makeText(this, "Please use bits mail", Toast.LENGTH_SHORT).show()
                 revokeAccess()
             }
-        } else {
-            //TODO: reload this activity
-            //Toast.makeText(this, "Login failed. Try again.", Toast.LENGTH_SHORT).show()
-
         }
     }
 

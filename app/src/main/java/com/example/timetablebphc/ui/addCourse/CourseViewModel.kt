@@ -16,23 +16,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
 
-/**
- * View Model to keep a reference to the word repository and
- * an up-to-date list of all words.
- */
 
 class CourseViewModel @ViewModelInject constructor(
     private val repository: CourseRepository,
     application: Application
 ) : AndroidViewModel(application) {
 
-
     val context = application
-    private val allCourses: LiveData<List<Course>> = repository.allCourses
 
-    /**
-     * Launching a new coroutine to insert the data in a non-blocking way
-     */
     @RequiresApi(Build.VERSION_CODES.O)
     fun insertCourse(course: Course) = viewModelScope.launch(Dispatchers.IO) {
         repository.insertCourse(course)

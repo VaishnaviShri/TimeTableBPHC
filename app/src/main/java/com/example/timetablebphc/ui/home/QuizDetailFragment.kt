@@ -29,7 +29,7 @@ class QuizDetailFragment :Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        position = args.position.toInt()
+        position = args.position
         return inflater.inflate(R.layout.fragment_quiz_details, container, false)
     }
 
@@ -37,7 +37,7 @@ class QuizDetailFragment :Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        homeViewModel.allQuizzes.observe(viewLifecycleOwner, Observer { quizzes ->
+        homeViewModel.allQuizzes.observe(viewLifecycleOwner, { quizzes ->
             quizzes?.let { quizzes ->
                 if(quizzes.isNotEmpty()) {
                     val quiz = quizzes[position]

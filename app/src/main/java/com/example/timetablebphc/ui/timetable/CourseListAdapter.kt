@@ -16,14 +16,14 @@
 
 package com.example.timetablebphc.ui.timetable
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Resources
 import android.os.Build
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.*
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.RequiresApi
@@ -57,8 +57,6 @@ class CourseListAdapter internal constructor(
         return CourseViewHolder(itemView)
     }
 
-
-    @SuppressLint("ResourceAsColor")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: CourseViewHolder, position: Int) {
 

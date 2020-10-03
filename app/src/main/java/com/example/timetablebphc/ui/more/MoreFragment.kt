@@ -9,22 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import com.example.timetablebphc.R
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_more.*
 
 class MoreFragment : Fragment() {
 
     private lateinit var moreViewModel: MoreViewModel
-
-    private lateinit var auth: FirebaseAuth
-    private lateinit var googleSignInClient: GoogleSignInClient
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        //TODO: remove redundancy of signout code, gso created twice
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

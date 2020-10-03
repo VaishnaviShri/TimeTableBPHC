@@ -34,7 +34,7 @@ class HomeFragment : Fragment() {
         recyclerview_home.layoutManager = LinearLayoutManager(context)
 
         Log.v("all quizzes", homeViewModel.allQuizzes.toString())
-        homeViewModel.allQuizzes.observe(viewLifecycleOwner, Observer { quizzes ->
+        homeViewModel.allQuizzes.observe(viewLifecycleOwner, { quizzes ->
             // Update the cached copy of the words in the adapter.
             quizzes?.let {
                 adapter?.setQuizzes(rearrangeList(it))

@@ -18,6 +18,8 @@
     <string name="add_course">Add course</string>
     <string name="add_quiz">Add quiz/ test/ assignment</string>
     <string name="timetable">TimeTable</string>
+    <string name="delete_quiz">delete quiz</string>
+    <string name="delete_course">delete course</string>
 
 
     <string-array name="quiz_types">
