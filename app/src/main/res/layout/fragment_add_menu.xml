@@ -11,8 +11,11 @@
         android:id="@+id/add_course_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
-        android:text="Add course"
+        android:layout_marginTop="232dp"
+        android:background="@color/colorPrimaryDark"
+        android:padding="8dp"
+        android:text="@string/add_course"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,9 +25,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
-        android:text="Add test or assignment date"
+        android:background="@color/colorPrimaryDark"
+        android:padding="8dp"
+        android:textColor="@color/white"
+        android:text="@string/add_quiz"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_course_button" />
+        app:layout_constraintTop_toBottomOf="@+id/add_course_button"
+        app:layout_constraintVertical_bias="0.216" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
