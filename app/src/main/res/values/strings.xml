@@ -26,6 +26,7 @@
     <string name="enter_meet_link">Enter meet link</string>
     <string name="remind_me_before_class">Remind me before class</string>
     <string name="save">save</string>
+    <string name="notification_title">New Notification!</string>
 
 
     <string-array name="quiz_types">

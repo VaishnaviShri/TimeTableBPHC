@@ -8,6 +8,7 @@ import android.os.Build
 import com.example.timetablebphc.R
 import com.example.timetablebphc.activities.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 @AndroidEntryPoint
 class AlarmReceiver : BroadcastReceiver() {
@@ -26,7 +27,7 @@ class AlarmReceiver : BroadcastReceiver() {
         val builder = Notification.Builder(context)
         val notification = builder.setContentTitle(title)
             .setContentText(message)
-            .setTicker("New Notification!")
+            .setTicker(context.getString(R.string.notification_title))
             .setSmallIcon(R.mipmap.ic_launcher)
             .setContentIntent(pendingIntent).build()
 
@@ -39,17 +40,18 @@ class AlarmReceiver : BroadcastReceiver() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 CHANNEL_ID,
-                "NotificationDemo",
+                CHANNEL_NAME,
                 NotificationManager.IMPORTANCE_DEFAULT
             )
             notificationManager.createNotificationChannel(channel)
         }
-
-        notificationManager.notify(0, notification)
+        val uniqueNotificationId = (Date().time / 1000L % Int.MAX_VALUE).toInt()
+        notificationManager.notify(uniqueNotificationId, notification)
     }
 
     companion object {
         private const val CHANNEL_ID = "some_channel_id"
+        private const val CHANNEL_NAME = "NotificationDemo"
     }
 
 }
