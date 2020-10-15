@@ -11,14 +11,14 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.example.timetablebphc.notifications.AlarmReceiver
 import com.example.timetablebphc.courseDB.Course
-import com.example.timetablebphc.repositories.CourseRepository
+import com.example.timetablebphc.repositories.TimeTableRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
 
 
 class CourseViewModel @ViewModelInject constructor(
-    private val repository: CourseRepository,
+    private val repository: TimeTableRepository,
     application: Application
 ) : AndroidViewModel(application) {
 
