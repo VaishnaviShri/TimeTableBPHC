@@ -9,10 +9,13 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.timetablebphc.R
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_timetable.*
+import kotlinx.android.synthetic.main.fragment_timetable.add_button
 
 @AndroidEntryPoint
 class DashboardFragment : Fragment() {
@@ -42,5 +45,10 @@ class DashboardFragment : Fragment() {
                 adapter?.setCourses(displayCourses)
             }
         })
+
+        add_button.setOnClickListener{
+            NavHostFragment.findNavController(this).navigate(R.id.action_navigation_to_add_menu_fragment)
+        }
+
     }
 }

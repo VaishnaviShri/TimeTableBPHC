@@ -5,19 +5,13 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.timetablebphc.dao.CourseDao
-import com.example.timetablebphc.dao.QuizDao
 import com.example.timetablebphc.dao.TimeTableDao
-import com.example.timetablebphc.dao.HomeDao
 
 @Database(entities = [Course::class, Quiz ::class], version = 1)
 @TypeConverters(Converters::class)
 abstract class CourseRoomDatabase : RoomDatabase() {
 
-    abstract fun courseDao(): CourseDao
-    abstract fun homeDao(): HomeDao
     abstract fun timeTableDao(): TimeTableDao
-    abstract fun quizDao(): QuizDao
 
     companion object {
         @Volatile

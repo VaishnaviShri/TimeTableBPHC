@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.example.timetablebphc.R
@@ -21,11 +22,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         auth = FirebaseAuth.getInstance()
         setContentView(R.layout.activity_main)
-
-        add_button.setOnClickListener{
-            val intent = Intent(this@MainActivity, AddActivity::class.java) // (1) (2)
-            startActivity(intent)
-        }
 
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
