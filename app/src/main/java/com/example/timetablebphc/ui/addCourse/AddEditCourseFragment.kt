@@ -81,7 +81,6 @@ class AddEditCourseFragment : Fragment() {
             courseTime = LocalTime.of(hour, minute)
         }
 
-
         for (i in 0 until week_grid_layout.childCount) {
             val dayCheckBox = week_grid_layout.getChildAt(i)
             dayCheckBox.setOnClickListener {
