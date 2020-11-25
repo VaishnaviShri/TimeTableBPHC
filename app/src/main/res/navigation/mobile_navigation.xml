@@ -38,6 +38,7 @@
         android:name="com.example.timetablebphc.ui.timetable.DashboardFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_timetable" >
+
         <action android:id="@+id/action_navigation_dashboard_to_course_detail"
             app:destination="@+id/navigation_course_detail">
             <argument
@@ -58,6 +59,17 @@
             android:defaultValue="0" />
         <action android:id="@+id/action_navigation_course_detail_to_dashboard"
             app:destination="@+id/navigation_dashboard"/>
+        <action android:id="@+id/action_navigation_course_detail_to_edit"
+            app:destination="@+id/navigation_add_course">
+            <argument
+                android:name="is_new"
+                app:argType="boolean"
+                android:defaultValue="true" />
+            <argument
+                android:name="position"
+                app:argType="integer"
+                android:defaultValue="0" />
+        </action>
     </fragment>
 
 
@@ -94,9 +106,18 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_add_course"
-        android:name="com.example.timetablebphc.ui.addCourse.AddCourseFragment"
+        android:name="com.example.timetablebphc.ui.addCourse.AddEditCourseFragment"
         android:label="Add course"
-        tools:layout="@layout/fragment_add_course" />
+        tools:layout="@layout/fragment_add_course" >
+        <argument
+            android:name="is_new"
+            app:argType="boolean"
+            android:defaultValue="true" />
+        <argument
+            android:name="position"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_add_test"

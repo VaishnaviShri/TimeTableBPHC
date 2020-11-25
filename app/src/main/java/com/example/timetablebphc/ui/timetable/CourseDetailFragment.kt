@@ -9,6 +9,8 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavHost
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.navArgs
 import com.example.timetablebphc.R
@@ -64,6 +66,13 @@ class CourseDetailFragment : Fragment() {
                             }
                         builder.create().show()
                     }
+                }
+
+                val courseKey = course.key
+
+                edit_course_button.setOnClickListener {
+                    val action = CourseDetailFragmentDirections.actionNavigationCourseDetailToEdit(false, courseKey)
+                    NavHostFragment.findNavController(this).navigate(action)
                 }
             }
         })

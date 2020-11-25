@@ -11,17 +11,24 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.navArgs
 import com.example.timetablebphc.activities.MainActivity
 import com.example.timetablebphc.R
 import com.example.timetablebphc.courseDB.Course
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_add_course.*
 import kotlinx.android.synthetic.main.fragment_add_course.button_save
+import kotlinx.android.synthetic.main.fragment_course_details.view.*
 import java.time.LocalTime
 
 @AndroidEntryPoint
-class AddCourseFragment : Fragment() {
+class AddEditCourseFragment : Fragment() {
     private val courseViewModel: CourseViewModel by viewModels()
+
+    private var isNew = true
+    private var position = 0
+    private val args: AddEditCourseFragmentArgs by navArgs()
 
     private lateinit var daysList: MutableList<Boolean>
 
@@ -35,29 +42,56 @@ class AddCourseFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        isNew = args.isNew
+        position = args.position
         return inflater.inflate(R.layout.fragment_add_course, container, false)
     }
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         var courseTime = LocalTime.now()
+        var notify = false
+
+        if(!isNew){
+            courseViewModel.allCourses.observe(viewLifecycleOwner, { courses : List<Course> ->
+                val course = courseViewModel.getDisplayCourseList(courses)[position]
+                edit_course_code.setText(course.code)
+                edit_course_detail.setText(course.detail)
+                edit_meet_link.setText(course.link)
+                courseTime = course.time
+                course_time_spinner.hour = course.time.hour
+                course_time_spinner.minute = course.time.minute
+
+                notification_switch.isChecked = course.notify
+                for (i in 0 until week_grid_layout.childCount) {
+                    val dayCheckBox = week_grid_layout.getChildAt(i)
+                    if (dayCheckBox is CheckBox) {
+                        //dayCheckBox.isChecked = course.days[i]
+                    }
+                }
+
+            })
+
+        }
+
         course_time_spinner.setOnTimeChangedListener { _, hour, minute ->
             courseTime = LocalTime.of(hour, minute)
         }
+
 
         for (i in 0 until week_grid_layout.childCount) {
             val dayCheckBox = week_grid_layout.getChildAt(i)
             dayCheckBox.setOnClickListener {
                 if (dayCheckBox is CheckBox) {
-                    val checked: Boolean = dayCheckBox.isChecked
+                    var checked: Boolean = dayCheckBox.isChecked
                     daysList[i] = checked
                 }
             }
         }
 
-        var notify = false
         notification_switch.setOnCheckedChangeListener { _, isChecked ->
             notify = isChecked
         }

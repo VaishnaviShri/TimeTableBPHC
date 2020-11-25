@@ -20,7 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_add_course"
-        android:name="com.example.timetablebphc.ui.addCourse.AddCourseFragment"
+        android:name="com.example.timetablebphc.ui.addCourse.AddEditCourseFragment"
         android:label="Add course"
         tools:layout="@layout/fragment_add_course" />
 
