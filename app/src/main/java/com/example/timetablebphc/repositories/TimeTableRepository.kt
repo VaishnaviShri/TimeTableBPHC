@@ -23,6 +23,16 @@ class TimeTableRepository @Inject constructor(private val timeTableDao: TimeTabl
     }
 
     @WorkerThread
+    suspend fun updateCourse(course: Course) {
+        timeTableDao.updateCourse(course)
+    }
+
+    @WorkerThread
+    suspend fun updateQuiz(quiz: Quiz){
+        timeTableDao.updateQuiz(quiz)
+    }
+
+    @WorkerThread
     suspend fun deleteQuiz(quiz: Quiz) {
         timeTableDao.deleteQuiz(quiz)
     }

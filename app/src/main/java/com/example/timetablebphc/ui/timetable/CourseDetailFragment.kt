@@ -68,10 +68,8 @@ class CourseDetailFragment : Fragment() {
                     }
                 }
 
-                val courseKey = course.key
-
                 edit_course_button.setOnClickListener {
-                    val action = CourseDetailFragmentDirections.actionNavigationCourseDetailToEdit(false, courseKey)
+                    val action = CourseDetailFragmentDirections.actionNavigationCourseDetailToEdit(false, position)
                     NavHostFragment.findNavController(this).navigate(action)
                 }
             }

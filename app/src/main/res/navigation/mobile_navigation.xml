@@ -21,19 +21,6 @@
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_quiz_detail"
-        android:name="com.example.timetablebphc.ui.home.QuizDetailFragment"
-        android:label="Quiz Detail"
-        tools:layout="@layout/fragment_quiz_details">
-        <argument
-            android:name="position"
-            app:argType="integer"
-            android:defaultValue="0" />
-        <action android:id="@+id/action_navigation_quiz_detail_to_home"
-            app:destination="@+id/navigation_home"/>
-    </fragment>
-
-    <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.example.timetablebphc.ui.timetable.DashboardFragment"
         android:label="@string/title_dashboard"
@@ -48,6 +35,32 @@
         </action>
 
     </fragment>
+
+    <fragment
+        android:id="@+id/navigation_quiz_detail"
+        android:name="com.example.timetablebphc.ui.home.QuizDetailFragment"
+        android:label="Quiz Detail"
+        tools:layout="@layout/fragment_quiz_details">
+        <argument
+            android:name="position"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <action android:id="@+id/action_navigation_quiz_detail_to_home"
+            app:destination="@+id/navigation_home"/>
+        <action android:id="@+id/action_navigation_quiz_detail_to_edit"
+            app:destination="@+id/navigation_add_quiz">
+            <argument
+                android:name="is_new"
+                app:argType="boolean"
+                android:defaultValue="true" />
+            <argument
+                android:name="position"
+                app:argType="integer"
+                android:defaultValue="0" />
+        </action>
+    </fragment>
+
+
     <fragment
         android:id="@+id/navigation_course_detail"
         android:name="com.example.timetablebphc.ui.timetable.CourseDetailFragment"
@@ -102,7 +115,7 @@
             app:destination="@id/navigation_add_course" />
         <action
             android:id="@+id/action_navigation_menu_fragment_to_navigation_add_test"
-            app:destination="@id/navigation_add_test" />
+            app:destination="@id/navigation_add_quiz" />
     </fragment>
     <fragment
         android:id="@+id/navigation_add_course"
@@ -117,13 +130,26 @@
             android:name="position"
             app:argType="integer"
             android:defaultValue="0" />
+        <action android:id="@+id/action_navigation_add_course_to_dashboard"
+            app:destination="@+id/navigation_home"/>
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_add_test"
-        android:name="com.example.timetablebphc.ui.addQuiz.AddQuizFragment"
+        android:id="@+id/navigation_add_quiz"
+        android:name="com.example.timetablebphc.ui.addQuiz.AddEditQuizFragment"
         android:label="Add test"
-        tools:layout="@layout/fragment_add_test" />
+        tools:layout="@layout/fragment_add_test">
+        <argument
+            android:name="is_new"
+            app:argType="boolean"
+            android:defaultValue="true" />
+        <argument
+            android:name="position"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <action android:id="@+id/action_navigation_add_quiz_to_dashboard"
+            app:destination="@+id/navigation_dashboard"/>
+    </fragment>
 
 
 </navigation>

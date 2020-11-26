@@ -15,9 +15,11 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import com.example.timetablebphc.activities.MainActivity
 import com.example.timetablebphc.R
 import com.example.timetablebphc.courseDB.Quiz
+import com.example.timetablebphc.ui.addCourse.AddEditCourseFragmentArgs
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_add_test.*
 import java.text.SimpleDateFormat
@@ -27,14 +29,21 @@ import java.time.ZoneId
 import java.util.*
 
 @AndroidEntryPoint
-class AddQuizFragment : Fragment() {
+class AddEditQuizFragment : Fragment() {
     private val quizViewModel: QuizViewModel by viewModels()
+
+    private var isNew = true
+    private var position = 0
+    private var key = 0
+    private val args: AddEditQuizFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        isNew = args.isNew
+        position = args.position
         return inflater.inflate(R.layout.fragment_add_test, container, false)
     }
 
@@ -44,6 +53,16 @@ class AddQuizFragment : Fragment() {
 
         val quizTypes = resources.getStringArray(R.array.quiz_types)
         var quizType = quizTypes[1]
+
+        if(!isNew){
+            quizViewModel.allQuizzes.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+                val quiz = it[position]
+                quizType = quiz.type
+
+            })
+        }
+
+
 
         if (spinner != null) {
             val adapter = context?.let {

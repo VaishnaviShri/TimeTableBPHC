@@ -12,7 +12,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.navArgs
 import com.example.timetablebphc.R
+import com.example.timetablebphc.ui.timetable.CourseDetailFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_course_details.*
 import kotlinx.android.synthetic.main.fragment_quiz_details.*
 import java.time.format.DateTimeFormatter
 
@@ -44,6 +46,7 @@ class QuizDetailFragment :Fragment(){
                     course_name.text = quiz.course
                     quiz_date.text = quiz.date.toString()
                     quiz_time.text = quiz.time.format(DateTimeFormatter.ofPattern("h:mma"))
+
                     delete_quiz_button.setOnClickListener {
                         val builder = context?.let { AlertDialog.Builder(it) }
                         if (builder != null) {
@@ -57,6 +60,11 @@ class QuizDetailFragment :Fragment(){
                                 }
                             builder.create().show()
                         }
+                    }
+
+                    edit_quiz_button.setOnClickListener {
+                        val action = QuizDetailFragmentDirections.actionNavigationQuizDetailToEdit(false, position)
+                        NavHostFragment.findNavController(this).navigate(action)
                     }
                 }
             }

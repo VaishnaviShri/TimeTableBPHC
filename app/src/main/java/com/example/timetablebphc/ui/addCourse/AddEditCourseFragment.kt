@@ -3,6 +3,7 @@ package com.example.timetablebphc.ui.addCourse
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.navArgs
 import com.example.timetablebphc.activities.MainActivity
 import com.example.timetablebphc.R
@@ -28,6 +30,7 @@ class AddEditCourseFragment : Fragment() {
 
     private var isNew = true
     private var position = 0
+    private var key = 0
     private val args: AddEditCourseFragmentArgs by navArgs()
 
     private lateinit var daysList: MutableList<Boolean>
@@ -58,6 +61,7 @@ class AddEditCourseFragment : Fragment() {
         if(!isNew){
             courseViewModel.allCourses.observe(viewLifecycleOwner, { courses : List<Course> ->
                 val course = courseViewModel.getDisplayCourseList(courses)[position]
+                key = course.key
                 edit_course_code.setText(course.code)
                 edit_course_detail.setText(course.detail)
                 edit_meet_link.setText(course.link)
@@ -69,7 +73,9 @@ class AddEditCourseFragment : Fragment() {
                 for (i in 0 until week_grid_layout.childCount) {
                     val dayCheckBox = week_grid_layout.getChildAt(i)
                     if (dayCheckBox is CheckBox) {
-                        //dayCheckBox.isChecked = course.days[i]
+                        Log.v("days of class", course.days.joinToString (", "))
+                        daysList[i] = course.days[i]
+                        dayCheckBox.isChecked = course.days[i]
                     }
                 }
 
@@ -100,13 +106,14 @@ class AddEditCourseFragment : Fragment() {
             val courseDetails = edit_course_detail.text.trim().toString()
             val meetLink = edit_meet_link.text.trim().toString()
 
+            if(isNew) key = 0
+
             val course =
-                Course(0, courseCode, courseDetails, courseTime, daysList, meetLink, notify)
+                Course(key, courseCode, courseDetails, courseTime, daysList, meetLink, notify)
             if(checkInput(course)) {
-                courseViewModel.insertCourse(course)
+                courseViewModel.insertOrUpdateCourse(isNew, course)
                 Toast.makeText(context,"Course saved!", Toast.LENGTH_SHORT).show()
-                val intent = Intent(context, MainActivity::class.java)
-                startActivity(intent)
+                NavHostFragment.findNavController(this).navigate(R.id.action_navigation_add_course_to_dashboard)
             }
 
         }

@@ -26,7 +26,7 @@
 
     <fragment
         android:id="@+id/navigation_add_test"
-        android:name="com.example.timetablebphc.ui.addQuiz.AddQuizFragment"
+        android:name="com.example.timetablebphc.ui.addQuiz.AddEditQuizFragment"
         android:label="Add test"
         tools:layout="@layout/fragment_add_test" />
 </navigation>

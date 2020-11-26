@@ -17,6 +17,9 @@ interface TimeTableDao {
     @Update
     suspend fun updateCourse(course: Course) : Int
 
+    @Update
+    suspend fun updateQuiz(quiz : Quiz) : Int
+
     @Delete
     suspend fun deleteCourse(course: Course) : Int
 

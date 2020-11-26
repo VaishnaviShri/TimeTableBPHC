@@ -9,6 +9,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
+import com.example.timetablebphc.courseDB.Course
 import com.example.timetablebphc.notifications.AlarmReceiver
 import com.example.timetablebphc.courseDB.Quiz
 import com.example.timetablebphc.repositories.TimeTableRepository
@@ -23,11 +24,21 @@ class QuizViewModel @ViewModelInject constructor(
 
     val context = application
 
+    val allQuizzes: LiveData<List<Quiz>> = repository.allQuizzes
+
     //launching coroutine
     @RequiresApi(Build.VERSION_CODES.O)
     fun insertQuiz(quiz: Quiz) = viewModelScope.launch(Dispatchers.IO) {
         repository.insertQuiz(quiz)
         setNotification(quiz)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun insertOrUpdateQuiz(isNew : Boolean, quiz: Quiz) = viewModelScope.launch(Dispatchers.IO) {
+        if(isNew)
+            repository.insertQuiz(quiz)
+        else
+            repository.updateQuiz(quiz)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

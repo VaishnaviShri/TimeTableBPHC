@@ -83,5 +83,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:contentDescription="@string/delete_quiz" />
 
+    <ImageButton
+        android:id="@+id/edit_quiz_button"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="148dp"
+        android:layout_marginRight="148dp"
+        android:layout_marginBottom="284dp"
+        android:background="@color/colorPrimary"
+        android:contentDescription="@string/delete_quiz"
+        android:src="@drawable/ic_baseline_edit_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

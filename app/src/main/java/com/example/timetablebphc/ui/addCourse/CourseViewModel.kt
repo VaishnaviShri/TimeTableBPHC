@@ -28,8 +28,12 @@ class CourseViewModel @ViewModelInject constructor(
     val allCourses: LiveData<List<Course>> = repository.allCourses
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun insertCourse(course: Course) = viewModelScope.launch(Dispatchers.IO) {
-        repository.insertCourse(course)
+    fun insertOrUpdateCourse(isNew : Boolean, course: Course) = viewModelScope.launch(Dispatchers.IO) {
+        if(isNew)
+            repository.insertCourse(course)
+        else
+            repository.updateCourse(course)
+
         if (course.notify)
             setNotificationForCourse(course)
     }
